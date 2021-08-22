@@ -1,4 +1,4 @@
 # Strapi application
 
 A quick description of your strapi application
-# api-poc
+# Nomad API

@@ -2,7 +2,8 @@
   "kind": "collectionType",
   "collectionName": "sites",
   "info": {
-    "name": "Sites"
+    "name": "Sites",
+    "description": ""
   },
   "options": {
     "increments": true,
@@ -11,15 +12,33 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
-    "Location": {
+    "latlng": {
       "type": "string"
     },
-    "Description": {
+    "description": {
       "type": "text"
+    },
+    "image": {
+      "type": "string"
+    },
+    "Tel": {
+      "type": "string"
+    },
+    "pricerange": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "float"
+    },
+    "lng": {
+      "type": "float"
     }
   }
 }
