@@ -25,6 +25,14 @@
       }
     },
     {
+      "method": "GET",
+      "path": "/sites/:id/safe",
+      "handler": "sites.findOneSafe",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "POST",
       "path": "/sites",
       "handler": "sites.create",
