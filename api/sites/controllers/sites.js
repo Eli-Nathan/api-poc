@@ -13,14 +13,6 @@ module.exports = {
     const entity = await strapi.services.sites.findOne({ id });
     const sanitized = sanitizeEntity(entity, {
       model: strapi.models.sites,
-      includeFields: [
-        "title",
-        "description",
-        "Tel",
-        "pricerange",
-        "category",
-        "image",
-      ],
     });
 
     const {
