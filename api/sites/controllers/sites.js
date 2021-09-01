@@ -15,13 +15,7 @@ module.exports = {
       model: strapi.models.sites,
     });
 
-    const {
-      id: _id,
-      created_at,
-      published_at,
-      updated_at,
-      ...rest
-    } = sanitized;
+    const { created_at, published_at, updated_at, ...rest } = sanitized;
     return rest;
   },
 };
