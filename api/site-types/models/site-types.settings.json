@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "site_types",
+  "info": {
+    "name": "Site types"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "type": {
+      "type": "string",
+      "required": true,
+      "default": "camp"
+    }
+  }
+}

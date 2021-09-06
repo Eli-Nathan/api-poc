@@ -39,6 +39,9 @@
     },
     "lng": {
       "type": "float"
+    },
+    "site_type": {
+      "model": "site-types"
     }
   }
 }
