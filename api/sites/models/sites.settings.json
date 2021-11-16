@@ -25,7 +25,7 @@
     "image": {
       "type": "string"
     },
-    "Tel": {
+    "tel": {
       "type": "string"
     },
     "pricerange": {
@@ -48,6 +48,15 @@
     },
     "region": {
       "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "maplink": {
+      "type": "string"
+    },
+    "email": {
+      "type": "email"
     }
   }
 }
