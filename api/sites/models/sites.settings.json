@@ -42,6 +42,12 @@
     },
     "site_type": {
       "model": "site-types"
+    },
+    "facilities": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
     }
   }
 }
