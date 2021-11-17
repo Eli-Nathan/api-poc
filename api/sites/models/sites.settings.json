@@ -17,7 +17,8 @@
       "required": true
     },
     "latlng": {
-      "type": "string"
+      "type": "string",
+      "unique": true
     },
     "description": {
       "type": "text"
@@ -40,9 +41,6 @@
     "lng": {
       "type": "float"
     },
-    "site_type": {
-      "model": "site-types"
-    },
     "facilities": {
       "type": "string"
     },
@@ -57,6 +55,18 @@
     },
     "email": {
       "type": "email"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "camp",
+        "tent",
+        "walk",
+        "historic",
+        "munro",
+        "beach",
+        "woods"
+      ]
     }
   }
 }
