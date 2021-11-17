@@ -24,7 +24,7 @@
       "type": "text"
     },
     "image": {
-      "type": "string"
+      "type": "text"
     },
     "tel": {
       "type": "string"
@@ -48,10 +48,10 @@
       "type": "string"
     },
     "url": {
-      "type": "string"
+      "type": "text"
     },
     "maplink": {
-      "type": "string"
+      "type": "text"
     },
     "email": {
       "type": "email"
