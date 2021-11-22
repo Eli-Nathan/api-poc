@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "edit-requests",
+  "info": {
+    "name": "Edit requests",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "site": {
+      "columnName": "site",
+      "private": true,
+      "targetColumnName": "editRequests",
+      "model": "sites",
+      "via": "edit_requests"
+    },
+    "data": {
+      "type": "json"
+    }
+  }
+}

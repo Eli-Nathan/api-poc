@@ -67,6 +67,11 @@
         "beach",
         "woods"
       ]
+    },
+    "edit_requests": {
+      "via": "site",
+      "columnName": "editRequests",
+      "collection": "edit-requests"
     }
   }
 }
