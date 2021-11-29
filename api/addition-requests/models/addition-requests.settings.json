@@ -1,0 +1,64 @@
+{
+  "kind": "collectionType",
+  "collectionName": "addition-requests",
+  "info": {
+    "name": "Addition requests",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "latlng": {
+      "type": "string",
+      "unique": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "text"
+    },
+    "tel": {
+      "type": "string"
+    },
+    "pricerange": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "float"
+    },
+    "lng": {
+      "type": "float"
+    },
+    "facilities": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "url": {
+      "type": "text"
+    },
+    "maplink": {
+      "type": "text"
+    },
+    "email": {
+      "type": "email"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": ["camp", "tent", "walk", "historic", "munro", "beach", "woods"]
+    }
+  }
+}
