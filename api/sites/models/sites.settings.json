@@ -69,9 +69,20 @@
       ]
     },
     "edit_requests": {
-      "via": "site",
       "columnName": "editRequests",
+      "targetColumnName": "site",
+      "via": "site",
       "collection": "edit-requests"
+    },
+    "images": {
+      "collection": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images"
+      ],
+      "plugin": "upload",
+      "required": false,
+      "pluginOptions": {}
     }
   }
 }

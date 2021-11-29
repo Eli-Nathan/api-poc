@@ -1,8 +1,8 @@
 {
   "kind": "collectionType",
-  "collectionName": "edit-requests",
+  "collectionName": "images",
   "info": {
-    "name": "Edit requests",
+    "name": "images",
     "description": ""
   },
   "options": {
@@ -12,15 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "site": {
-      "via": "edit_requests",
-      "columnName": "site",
-      "private": true,
-      "model": "sites"
-    },
-    "data": {
-      "type": "json"
-    },
     "images": {
       "collection": "file",
       "via": "related",
