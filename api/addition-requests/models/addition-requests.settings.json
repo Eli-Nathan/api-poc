@@ -77,6 +77,12 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "priority": {
+      "type": "biginteger",
+      "default": "0",
+      "max": "5",
+      "min": "0"
     }
   }
 }
