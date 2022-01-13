@@ -77,6 +77,11 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "user": {
+      "type": "json",
+      "required": true,
+      "private": true
     }
   }
 }
