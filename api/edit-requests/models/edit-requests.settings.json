@@ -13,13 +13,14 @@
   "pluginOptions": {},
   "attributes": {
     "site": {
-      "via": "edit_requests",
       "columnName": "site",
-      "private": true,
+      "targetColumnName": "editRequests",
+      "via": "edit_requests",
       "model": "sites"
     },
     "data": {
-      "type": "json"
+      "type": "json",
+      "private": true
     },
     "images": {
       "collection": "file",

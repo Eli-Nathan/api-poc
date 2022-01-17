@@ -69,9 +69,8 @@
       ]
     },
     "edit_requests": {
-      "columnName": "editRequests",
-      "targetColumnName": "site",
       "via": "site",
+      "columnName": "editRequests",
       "collection": "edit-requests"
     },
     "images": {
