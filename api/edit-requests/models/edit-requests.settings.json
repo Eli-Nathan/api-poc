@@ -31,6 +31,17 @@
       "plugin": "upload",
       "required": false,
       "pluginOptions": {}
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "submitted",
+        "pending",
+        "moderating",
+        "complete",
+        "rejected"
+      ],
+      "default": "submitted"
     }
   }
 }

@@ -82,6 +82,17 @@
       "type": "json",
       "required": true,
       "private": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "submitted",
+        "pending",
+        "moderating",
+        "complete",
+        "rejected"
+      ],
+      "default": "submitted"
     }
   }
 }
