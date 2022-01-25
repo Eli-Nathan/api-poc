@@ -34,6 +34,7 @@ module.exports = async (ctx, next) => {
             Authorization: ctx.request.header.authorization,
           },
         });
+        ctx.state.user = data.data;
 
         return await next();
       } catch (error) {
