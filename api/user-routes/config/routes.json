@@ -10,6 +10,14 @@
     },
     {
       "method": "GET",
+      "path": "/user-routes/public",
+      "handler": "user-routes.findPublic",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
       "path": "/user-routes/count",
       "handler": "user-routes.count",
       "config": {

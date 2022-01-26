@@ -19,6 +19,7 @@ module.exports = {
     }
     return sanitizeEntity(entity, { model: strapi.models["user-routes"] });
   },
+
   async update(ctx) {
     const { id } = ctx.params;
 
@@ -30,7 +31,7 @@ module.exports = {
     });
 
     if (!route) {
-      return ctx.unauthorized(`You can't update this entry`);
+      return ctx.unauthorized(`You can't update this route`);
     }
 
     if (ctx.is("multipart")) {
@@ -46,5 +47,92 @@ module.exports = {
     }
 
     return sanitizeEntity(entity, { model: strapi.models["user-routes"] });
+  },
+
+  async delete(ctx) {
+    const { id } = ctx.params;
+
+    let entity;
+
+    const [route] = await strapi.services["user-routes"].find({
+      id: ctx.params.id,
+      owner: ctx.state.user.sub,
+    });
+
+    if (!route) {
+      return ctx.unauthorized(`You can't delete this route`);
+    }
+
+    entity = await strapi.services["user-routes"].delete({ id });
+
+    return sanitizeEntity(entity, { model: strapi.models["user-routes"] });
+  },
+
+  async find(ctx) {
+    let routes;
+
+    if (ctx.query) {
+      routes = await strapi.services["user-routes"].find({
+        ...ctx.query,
+        owner: ctx.state.user.sub,
+      });
+      return sanitizeEntity(routes, { model: strapi.models["user-routes"] });
+    }
+
+    routes = await strapi.services["user-routes"].find({
+      owner: ctx.state.user.sub,
+    });
+
+    return sanitizeEntity(routes, { model: strapi.models["user-routes"] });
+  },
+
+  async count(ctx) {
+    let routes;
+
+    if (ctx.query) {
+      routes = await strapi.services["user-routes"].count({
+        ...ctx.query,
+        owner: ctx.state.user.sub,
+      });
+      return sanitizeEntity(routes, { model: strapi.models["user-routes"] });
+    }
+
+    routes = await strapi.services["user-routes"].count({
+      owner: ctx.state.user.sub,
+    });
+    return sanitizeEntity(routes, { model: strapi.models["user-routes"] });
+  },
+
+  async findOne(ctx) {
+    const { id } = ctx.params;
+    let routes;
+
+    const [route] = await strapi.services["user-routes"].find({
+      id: ctx.params.id,
+      owner: ctx.state.user.sub,
+    });
+
+    if (!route) {
+      ctx.status = 404;
+      return { status: 404, message: "Route not found" };
+    }
+    return sanitizeEntity(route, { model: strapi.models["user-routes"] });
+  },
+
+  async findPublic(ctx) {
+    let routes;
+
+    if (ctx.query) {
+      routes = await strapi.services["user-routes"].find({
+        ...ctx.query,
+        public: true,
+      });
+      return sanitizeEntity(routes, { model: strapi.models["user-routes"] });
+    }
+
+    routes = await strapi.services["user-routes"].find({
+      public: true,
+    });
+    return sanitizeEntity(routes, { model: strapi.models["user-routes"] });
   },
 };
