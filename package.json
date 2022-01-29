@@ -11,34 +11,22 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "axios": "^0.21.1",
-    "graphql": "^16.0.1",
-    "knex": "0.21.18",
-    "pg": "^8.7.1",
-    "pg-connection-string": "^2.5.0",
-    "sqlite3": "5.0.0",
-    "strapi": "3.6.5",
-    "strapi-admin": "3.6.5",
-    "strapi-connector-bookshelf": "3.6.5",
-    "strapi-plugin-content-manager": "3.6.5",
-    "strapi-plugin-content-type-builder": "3.6.5",
-    "strapi-plugin-email": "3.6.5",
-    "strapi-plugin-i18n": "3.6.5",
-    "strapi-plugin-import-export-content": "^0.4.2",
-    "strapi-plugin-upload": "3.6.5",
-    "strapi-plugin-users-permissions": "3.6.5",
-    "strapi-provider-upload-cloudinary": "^3.6.8",
-    "strapi-utils": "3.6.5"
+    "@strapi/plugin-i18n": "4.0.5",
+    "@strapi/plugin-users-permissions": "4.0.5",
+    "@strapi/provider-upload-cloudinary": "^4.0.5",
+    "@strapi/strapi": "4.0.5",
+    "sqlite3": "5.0.2",
+    "strapi-utils": "4.0.5"
   },
   "author": {
     "name": "A Strapi developer"
   },
   "strapi": {
-    "uuid": "1f25d9e1-95bb-4549-be14-bb171bb719b7"
+    "uuid": "77a9714d-c4a2-4c0e-8049-b61c2fd0425f"
   },
   "engines": {
-    "node": ">=10.16.0 <=14.x.x",
-    "npm": "^6.0.0"
+    "node": ">=12.x.x <=16.x.x",
+    "npm": ">=6.0.0"
   },
   "license": "MIT"
 }
