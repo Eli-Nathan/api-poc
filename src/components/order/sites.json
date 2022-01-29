@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_order_sites",
+  "info": {
+    "displayName": "Sites",
+    "icon": "sort-numeric-down"
+  },
+  "options": {},
+  "attributes": {
+    "site": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::site.site"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_routes",
+  "info": {
+    "singularName": "user-route",
+    "pluralName": "user-routes",
+    "displayName": "User routes",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "public": {
+      "type": "boolean",
+      "default": false
+    },
+    "owner": {
+      "type": "string",
+      "private": true
+    },
+    "distances": {
+      "type": "json"
+    },
+    "sites": {
+      "displayName": "Sites",
+      "type": "component",
+      "repeatable": true,
+      "component": "order.sites"
+    }
+  }
+}

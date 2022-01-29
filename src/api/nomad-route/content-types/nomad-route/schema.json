@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "nomad_routes",
+  "info": {
+    "singularName": "nomad-route",
+    "pluralName": "nomad-routes",
+    "displayName": "Nomad routes"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
+    },
+    "sites": {
+      "type": "component",
+      "repeatable": true,
+      "component": "order.sites"
+    }
+  }
+}

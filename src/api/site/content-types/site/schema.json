@@ -1,0 +1,93 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sites",
+  "info": {
+    "singularName": "site",
+    "pluralName": "sites",
+    "displayName": "Sites",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "latlng": {
+      "type": "string",
+      "unique": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "text"
+    },
+    "tel": {
+      "type": "string"
+    },
+    "pricerange": {
+      "type": "string"
+    },
+    "category": {
+      "type": "string"
+    },
+    "lat": {
+      "type": "float"
+    },
+    "lng": {
+      "type": "float"
+    },
+    "facilities": {
+      "type": "string"
+    },
+    "region": {
+      "type": "string"
+    },
+    "url": {
+      "type": "text"
+    },
+    "maplink": {
+      "type": "text"
+    },
+    "email": {
+      "type": "email"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "camp",
+        "tent",
+        "walk",
+        "historic",
+        "munro",
+        "beach",
+        "woods"
+      ]
+    },
+    "priority": {
+      "type": "integer",
+      "default": 0,
+      "max": 5,
+      "min": 0
+    },
+    "images": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "edit_requests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::edit-request.edit-request",
+      "mappedBy": "site"
+    }
+  }
+}
