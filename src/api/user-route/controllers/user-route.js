@@ -9,37 +9,32 @@ const utils = require("@strapi/utils");
 
 const { parseMultipartData } = utils;
 
+const populateList = ["sites.site", "image"];
+
+const enrichCtx = (ctx) => {
+  if (!ctx.query) {
+    ctx.query = {};
+  }
+  const currentPopulateList = ctx.query.populate || [];
+  ctx.query.populate = [...currentPopulateList, ...populateList];
+  return ctx;
+};
+
 module.exports = createCoreController(
   "api::user-route.user-route",
   ({ strapi }) => ({
     // find method
     async find(ctx) {
-      let routes;
-
-      if (ctx.query) {
-        routes = await this.find({
-          ...ctx.query,
-          owner: ctx.state.user.sub,
-        });
-        return this.sanitizeOutput(routes, ctx);
-      }
-
-      routes = await this.find({
-        owner: ctx.state.user.sub,
-      });
+      const controllerCtx = enrichCtx(ctx);
+      const routes = await super.find(controllerCtx);
 
       return this.sanitizeOutput(routes, ctx);
     },
 
     // findOne method
     async findOne(ctx) {
-      const { id } = ctx.params;
-      let routes;
-
-      const [route] = await this.find({
-        id: ctx.params.id,
-        owner: ctx.state.user.sub,
-      });
+      const controllerCtx = enrichCtx(ctx);
+      const route = await super.findOne(controllerCtx);
 
       if (!route) {
         ctx.status = 404;
@@ -50,79 +45,30 @@ module.exports = createCoreController(
 
     // findPublic method
     async findPublic(ctx) {
-      let routes;
-
-      if (ctx.query) {
-        routes = await this.find({
-          ...ctx.query,
+      const query = {
+        ...ctx.query,
+        filters: {
           public: true,
-        });
-        return this.sanitizeOutput(routes, ctx);
-      }
+        },
+      };
 
-      routes = await this.find({
-        public: true,
-      });
+      const routes = await super.find({ query });
       return this.sanitizeOutput(routes, ctx);
-    },
-
-    // create method
-    async create(ctx) {
-      let entity;
-      if (ctx.is("multipart")) {
-        const { data, files } = parseMultipartData(ctx);
-        data.owner = ctx.state.user.sub;
-        entity = await this.create(data, { files });
-      } else {
-        ctx.request.body.owner = ctx.state.user.sub;
-        entity = await this.create(ctx.request.body);
-      }
-      return this.sanitizeOutput(entity, ctx);
     },
 
     // update method
     async update(ctx) {
-      const { id } = ctx.params;
-
-      let entity;
-
-      const [route] = await this.find({
-        id: ctx.params.id,
-        owner: ctx.state.user.sub,
-      });
-
-      if (!route) {
-        return ctx.unauthorized(`You can't update this entry`);
-      }
-
-      if (ctx.is("multipart")) {
-        const { data, files } = parseMultipartData(ctx);
-        entity = await this.update({ id }, data, {
-          files,
-        });
-      } else {
-        entity = await this.update({ id }, ctx.request.body);
-      }
+      const controllerCtx = enrichCtx(ctx);
+      const entity = await super.update(controllerCtx);
 
       return this.sanitizeOutput(entity, ctx);
     },
 
     // delete method
     async delete(ctx) {
-      const { id } = ctx.params;
+      const controllerCtx = enrichCtx(ctx);
 
-      let entity;
-
-      const [route] = await this.find({
-        id: ctx.params.id,
-        owner: ctx.state.user.sub,
-      });
-
-      if (!route) {
-        return ctx.unauthorized(`You can't delete this route`);
-      }
-
-      entity = await this.delete({ id });
+      const entity = await super.delete(controllerCtx);
 
       return this.sanitizeOutput(entity, ctx);
     },
