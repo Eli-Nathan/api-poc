@@ -44,7 +44,7 @@
     "email": {
       "type": "email"
     },
-    "enum": {
+    "type": {
       "type": "enumeration",
       "enum": [
         "camp",
@@ -69,6 +69,13 @@
     },
     "user": {
       "type": "json"
+    },
+    "images": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }
