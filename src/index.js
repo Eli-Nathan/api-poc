@@ -13,7 +13,7 @@ module.exports = {
   register({ strapi }) {
     strapi.container.get("auth").register("content-api", {
       name: "auth0-jwt-verifier",
-      async authenticate(ctx, next) {
+      async authenticate(ctx) {
         if (ctx.state.user) {
           // request is already authenticated in a different way
           return { authenticated: true };
