@@ -32,10 +32,12 @@ module.exports = {
                 Authorization: ctx.request.header.authorization,
               },
             });
-            ctx.state.user = data.data;
 
-            if (data && data.data) {
-              return { authenticated: true };
+            const userData = data.data;
+            ctx.state.user = userData;
+
+            if (userData) {
+              return { authenticated: true, credentials: userData };
             }
             return { authenticated: false };
           } catch (error) {

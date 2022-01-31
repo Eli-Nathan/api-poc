@@ -18,8 +18,9 @@ module.exports = (plugin) => {
             Authorization: ctx.request.header.authorization,
           },
         });
-        ctx.state.user = data.data;
-        if (data.data) {
+        const userData = data.data;
+        ctx.state.user = userData;
+        if (userData) {
           return true;
         }
       } catch (error) {
