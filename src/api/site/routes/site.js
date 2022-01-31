@@ -4,9 +4,6 @@ module.exports = {
       method: "GET",
       path: "/sites",
       handler: "site.find",
-      config: {
-        policies: ["plugin::users-permissions.isAuthed"],
-      },
     },
     {
       method: "GET",
