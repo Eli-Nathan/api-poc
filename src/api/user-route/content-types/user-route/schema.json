@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "image": {
       "type": "media",
@@ -23,22 +24,23 @@
         "images"
       ]
     },
-    "public": {
-      "type": "boolean",
-      "default": false
-    },
-    "owner": {
-      "type": "string",
-      "private": true
-    },
     "distances": {
       "type": "json"
     },
+    "owner": {
+      "type": "string",
+      "required": false,
+      "private": true
+    },
     "sites": {
-      "displayName": "Sites",
       "type": "component",
       "repeatable": true,
       "component": "order.sites"
+    },
+    "public": {
+      "type": "boolean",
+      "default": false,
+      "required": false
     }
   }
 }

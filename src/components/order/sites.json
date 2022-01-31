@@ -2,13 +2,14 @@
   "collectionName": "components_order_sites",
   "info": {
     "displayName": "Sites",
-    "icon": "sort-numeric-down"
+    "icon": "sort",
+    "description": ""
   },
   "options": {},
   "attributes": {
     "site": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "oneToOne",
       "target": "api::site.site"
     }
   }

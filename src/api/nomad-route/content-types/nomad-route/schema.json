@@ -15,17 +15,20 @@
       "type": "string",
       "required": true
     },
+    "distances": {
+      "type": "json"
+    },
+    "sites": {
+      "type": "component",
+      "repeatable": true,
+      "component": "order.sites"
+    },
     "image": {
       "allowedTypes": [
         "images"
       ],
       "type": "media",
       "multiple": false
-    },
-    "sites": {
-      "type": "component",
-      "repeatable": true,
-      "component": "order.sites"
     }
   }
 }
