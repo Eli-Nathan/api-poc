@@ -4,19 +4,11 @@ module.exports = {
       method: "GET",
       path: "/sites",
       handler: "site.find",
-      config: {
-        policies: ["plugin::users-permissions.isAuthed", "global::is-owner"],
-      },
     },
     {
       method: "GET",
       path: "/sites/:id",
       handler: "site.findOne",
-    },
-    {
-      method: "GET",
-      path: "/sites/:id/safe",
-      handler: "site.findOneSafe",
     },
     {
       method: "POST",
