@@ -56,6 +56,14 @@ module.exports = createCoreController(
       return this.sanitizeOutput(routes, ctx);
     },
 
+    // create method
+    async create(ctx) {
+      const controllerCtx = enrichCtx(ctx);
+      const entity = await super.create(controllerCtx);
+
+      return this.sanitizeOutput(entity, ctx);
+    },
+
     // update method
     async update(ctx) {
       const controllerCtx = enrichCtx(ctx);
