@@ -28,7 +28,7 @@ const enrichCtx = (ctx) => {
 module.exports = createCoreController(
   "api::auth-user.auth-user",
   ({ strapi }) => ({
-    // find method
+    // findMe method
     async findMe(ctx) {
       const user = await super.findOne(ctx);
       return user;
