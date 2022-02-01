@@ -30,8 +30,9 @@ module.exports = createCoreController(
   ({ strapi }) => ({
     // findMe method
     async findMe(ctx) {
+      const enrichedcCtx = enrichCtx(ctx);
       const user = await super.findOne(ctx);
-      return user;
+      return this.sanitizeOutput(user, ctx);
     },
   })
 );
