@@ -22,4 +22,5 @@ module.exports = [
       },
     },
   },
+  "api::user-route.populate-user-routes",
 ];
