@@ -18,7 +18,7 @@ module.exports = async (policyContext, config, { strapi }) => {
       .findMany({
         where: {
           ...idQuery,
-          owner: { $eq: policyContext.state.user.sub },
+          owner: policyContext.state.user.id,
         },
       });
 
@@ -30,7 +30,7 @@ module.exports = async (policyContext, config, { strapi }) => {
       policyContext.query.filters = {};
     }
     //Set owner as current user
-    policyContext.query.filters.owner = policyContext.state.user.sub;
+    policyContext.query.filters.owner = policyContext.state.user.id;
 
     if (entity && entity.length > 0) {
       return true; // Return true (policy allows the request through)

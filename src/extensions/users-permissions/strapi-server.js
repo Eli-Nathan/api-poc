@@ -19,7 +19,14 @@ module.exports = (plugin) => {
           },
         });
         const userData = data.data;
-        ctx.state.user = userData;
+        const user = await strapi.db.query(`api::auth-user.auth-user`).findOne({
+          where: {
+            id: user.id,
+          },
+        });
+
+        ctx.state.user = user;
+        ctx.state.user.sub = userData.sub;
         if (userData) {
           return true;
         }

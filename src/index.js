@@ -34,10 +34,20 @@ module.exports = {
             });
 
             const userData = data.data;
-            ctx.state.user = userData;
+
+            const user = await strapi.db
+              .query(`api::auth-user.auth-user`)
+              .findOne({
+                where: {
+                  user_id: userData.sub,
+                },
+              });
+
+            ctx.state.user = user;
+            ctx.state.user.sub = userData.sub;
 
             if (userData) {
-              return { authenticated: true, credentials: userData };
+              return { authenticated: true, credentials: user };
             }
             return { authenticated: false };
           } catch (error) {

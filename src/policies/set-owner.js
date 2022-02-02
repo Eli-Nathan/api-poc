@@ -1,9 +1,9 @@
 module.exports = async (ctx, config, { strapi }) => {
   if (ctx.state.user) {
     if (ctx.is("multipart")) {
-      ctx.request.body.data.owner = ctx.state.user.sub;
+      ctx.request.body.data.owner = ctx.state.user.id;
     } else {
-      ctx.request.body.owner = ctx.state.user.sub;
+      ctx.request.body.owner = ctx.state.user.id;
     }
 
     return true;
