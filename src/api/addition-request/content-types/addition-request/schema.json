@@ -67,15 +67,19 @@
       ],
       "default": "submitted"
     },
-    "user": {
-      "type": "json"
-    },
     "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::auth-user.auth-user",
+      "inversedBy": "addition_requests"
     }
   }
 }

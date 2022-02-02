@@ -4,14 +4,15 @@
   "info": {
     "singularName": "edit-request",
     "pluralName": "edit-requests",
-    "displayName": "Edit requests"
+    "displayName": "Edit requests",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
-    "site": {
+    "sites": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::site.site",
@@ -21,11 +22,12 @@
       "type": "json"
     },
     "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "status": {
       "type": "enumeration",
@@ -36,6 +38,12 @@
         "complete",
         "rejected"
       ]
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::auth-user.auth-user",
+      "inversedBy": "edit_requests"
     }
   }
 }

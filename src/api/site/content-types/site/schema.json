@@ -87,7 +87,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::edit-request.edit-request",
-      "mappedBy": "site"
+      "mappedBy": "sites"
     }
   }
 }

@@ -21,16 +21,6 @@
       "required": true,
       "private": true
     },
-    "edit_requests": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::edit-request.edit-request"
-    },
-    "user_routes": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::user-route.user-route"
-    },
     "level": {
       "type": "enumeration",
       "enum": [
@@ -54,11 +44,6 @@
     "avatar": {
       "type": "text"
     },
-    "addition_requests": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::addition-request.addition-request"
-    },
     "profile_pic": {
       "type": "media",
       "multiple": false,
@@ -71,6 +56,24 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::site.site"
+    },
+    "user_routes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-route.user-route",
+      "mappedBy": "owner"
+    },
+    "addition_requests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::addition-request.addition-request",
+      "mappedBy": "owner"
+    },
+    "edit_requests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::edit-request.edit-request",
+      "mappedBy": "owner"
     }
   }
 }
