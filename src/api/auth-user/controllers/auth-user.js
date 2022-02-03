@@ -14,6 +14,7 @@ const populateList = [
   "edit-requests",
   "user-routes",
   "favourites",
+  "profile_pic",
 ];
 
 const enrichCtx = (ctx) => {

@@ -6,12 +6,17 @@ module.exports = async (ctx, config, { strapi }) => {
     if (!ctx.request.body.data) {
       ctx.request.body.data = {};
     }
-    ctx.request.body.data.user_id = ctx.state.user.sub;
-    ctx.request.body.data.email = ctx.state.user.email;
-    ctx.request.body.data.avatar = ctx.state.user.picture;
-    ctx.request.body.data.name =
-      ctx.state.user.name ||
-      `${ctx.state.user.givenName} ${ctx.state.user.familyName}`;
+    const userDetails = ctx.state.user;
+    ctx.request.body.data.user_id = userDetails.sub;
+    ctx.request.body.data.email = userDetails.email;
+    ctx.request.body.data.avatar = userDetails.picture;
+    let name;
+    if (userDetails.name) {
+      name = userDetails.name;
+    } else if (userDetails.givenName && userDetails.familyName) {
+      name = `${userDetails.givenName} ${userDetails.familyName}`;
+    }
+    ctx.request.body.data.name = name;
     return true;
   }
 
