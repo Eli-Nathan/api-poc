@@ -8,9 +8,11 @@
     "start": "strapi start",
     "build": "strapi build",
     "strapi": "strapi",
-    "debug": "node --inspect=127.0.0.1:9229 ./node_modules/@strapi/strapi/bin/strapi.js develop"
+    "debug": "nodemon --inspect=127.0.0.1:9229 ./node_modules/@strapi/strapi/bin/strapi.js develop"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
   "dependencies": {
     "@strapi/plugin-i18n": "4.0.5",
     "@strapi/plugin-users-permissions": "4.0.5",
