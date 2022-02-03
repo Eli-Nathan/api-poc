@@ -14,22 +14,28 @@ module.exports = {
       method: "GET",
       path: "/addition-requests",
       handler: "addition-request.find",
+      middlewares: ["populate-additions"],
       config: {
-        policies: ["plugin::users-permissions.isAuthed"],
+        policies: ["plugin::users-permissions.isAuthed", "global::is-owner"],
       },
     },
     {
       method: "GET",
       path: "/addition-requests/:id",
       handler: "addition-request.findOne",
+      middlewares: ["populate-additions"],
+      config: {
+        policies: ["plugin::users-permissions.isAuthed", "global::is-owner"],
+      },
     },
     {
       method: "POST",
       path: "/addition-requests",
-      config: {
-        policies: ["plugin::users-permissions.isAuthed"],
-      },
       handler: "addition-request.create",
+      middlewares: ["populate-additions"],
+      config: {
+        policies: ["plugin::users-permissions.isAuthed", "global::set-owner"],
+      },
     },
   ],
 };
