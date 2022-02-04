@@ -1,4 +1,4 @@
-const populateList = ["sites", "image"];
+const populateList = ["*"];
 
 const enrichCtx = (ctx) => {
   if (!ctx.query) {

@@ -10,9 +10,10 @@ const utils = require("@strapi/utils");
 const { parseMultipartData } = utils;
 
 const populateList = [
-  "addition-requests",
-  "edit-requests",
-  "user-routes",
+  "addition_requests",
+  "edit_requests",
+  "edit_requests.site",
+  "user_routes",
   "favourites",
   "profile_pic",
 ];
@@ -33,6 +34,13 @@ module.exports = createCoreController(
     async findMe(ctx) {
       const enrichedcCtx = enrichCtx(ctx);
       const user = await super.findOne(ctx);
+      return this.sanitizeOutput(user, ctx);
+    },
+
+    // update method
+    async update(ctx) {
+      const enrichedcCtx = enrichCtx(ctx);
+      const user = await super.update(ctx);
       return this.sanitizeOutput(user, ctx);
     },
   })

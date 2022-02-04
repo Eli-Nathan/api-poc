@@ -22,5 +22,13 @@ module.exports = {
         policies: ["plugin::users-permissions.isAuthed", "set-user"],
       },
     },
+    {
+      method: "PUT",
+      path: "/auth-users/:id",
+      handler: "auth-user.update",
+      config: {
+        policies: ["plugin::users-permissions.isAuthed", "is-user"],
+      },
+    },
   ],
 };
