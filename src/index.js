@@ -34,6 +34,7 @@ module.exports = {
             });
 
             const userData = data.data;
+            console.log("userData", userData);
 
             const nomadUser = await strapi.db
               .query(`api::auth-user.auth-user`)
