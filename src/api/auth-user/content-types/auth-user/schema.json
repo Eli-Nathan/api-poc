@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "auth_users",
+  "info": {
+    "singularName": "auth-user",
+    "pluralName": "auth-users",
+    "displayName": "Auth users",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": false
+    },
+    "email": {
+      "type": "email",
+      "required": true,
+      "private": true
+    },
+    "level": {
+      "type": "enumeration",
+      "enum": [
+        "nomad",
+        "wanderer",
+        "explorer",
+        "adventurer",
+        "pioneer"
+      ],
+      "default": "nomad"
+    },
+    "score": {
+      "type": "integer",
+      "default": 0
+    },
+    "user_id": {
+      "type": "string",
+      "unique": true,
+      "required": false
+    },
+    "avatar": {
+      "type": "text"
+    },
+    "profile_pic": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "favourites": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::site.site"
+    },
+    "user_routes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::user-route.user-route",
+      "mappedBy": "owner"
+    },
+    "addition_requests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::addition-request.addition-request",
+      "mappedBy": "owner"
+    },
+    "edit_requests": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::edit-request.edit-request",
+      "mappedBy": "owner"
+    }
+  }
+}

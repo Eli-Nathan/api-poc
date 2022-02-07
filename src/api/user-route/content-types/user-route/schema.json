@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "user_routes",
+  "info": {
+    "singularName": "user-route",
+    "pluralName": "user-routes",
+    "displayName": "User routes",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "distances": {
+      "type": "json"
+    },
+    "sites": {
+      "type": "component",
+      "repeatable": true,
+      "component": "order.sites"
+    },
+    "public": {
+      "type": "boolean",
+      "default": false,
+      "required": false
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::auth-user.auth-user",
+      "inversedBy": "user_routes"
+    }
+  }
+}
