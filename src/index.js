@@ -18,6 +18,7 @@ module.exports = {
           // request is already authenticated in a different way
           return { authenticated: true };
         }
+        console.log("here", ctx);
 
         if (
           ctx.request &&
