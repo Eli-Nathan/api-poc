@@ -1,5 +1,9 @@
 module.exports = async (policyContext, config, { strapi }) => {
-  if (policyContext.state.user && policyContext.state.route) {
+  if (
+    policyContext.state.user &&
+    policyContext.state.user.id &&
+    policyContext.state.route
+  ) {
     // Get api name
     const apiName = policyContext.state.route.info.apiName;
     // Get controllerName

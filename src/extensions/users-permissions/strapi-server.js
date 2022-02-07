@@ -18,20 +18,30 @@ module.exports = (plugin) => {
             Authorization: ctx.request.header.authorization,
           },
         });
-        const userData = data.data;
-        const user = await strapi.db.query(`api::auth-user.auth-user`).findOne({
-          where: {
-            id: user.id,
-          },
-        });
 
-        ctx.state.user = user;
-        ctx.state.user.sub = userData.sub;
-        if (userData) {
-          return true;
+        const userData = data.data;
+
+        const nomadUser = await strapi.db
+          .query(`api::auth-user.auth-user`)
+          .findOne({
+            where: {
+              user_id: userData.sub,
+            },
+          });
+
+        if (nomadUser) {
+          ctx.state.user = nomadUser;
+          ctx.state.user.sub = userData.sub;
+          return { authenticated: true, credentials: nomadUser };
         }
+
+        if (userData) {
+          ctx.state.user = userData;
+          return { authenticated: true, credentials: userData };
+        }
+        return { authenticated: false };
       } catch (error) {
-        return false;
+        return ctx.unauthorized(error);
       }
     }
 

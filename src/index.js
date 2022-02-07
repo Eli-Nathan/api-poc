@@ -35,7 +35,7 @@ module.exports = {
 
             const userData = data.data;
 
-            const user = await strapi.db
+            const nomadUser = await strapi.db
               .query(`api::auth-user.auth-user`)
               .findOne({
                 where: {
@@ -43,11 +43,15 @@ module.exports = {
                 },
               });
 
-            ctx.state.user = user;
-            ctx.state.user.sub = userData.sub;
+            if (nomadUser) {
+              ctx.state.user = nomadUser;
+              ctx.state.user.sub = userData.sub;
+              return { authenticated: true, credentials: nomadUser };
+            }
 
             if (userData) {
-              return { authenticated: true, credentials: user };
+              ctx.state.user = userData;
+              return { authenticated: true, credentials: userData };
             }
             return { authenticated: false };
           } catch (error) {
