@@ -1,5 +1,6 @@
 "use strict";
 const axios = require("axios");
+const logger = require("./nomad/logger");
 
 const auth0domain = process.env.AUTH0_DOMAIN;
 
@@ -14,11 +15,15 @@ module.exports = {
     strapi.container.get("auth").register("content-api", {
       name: "auth0-jwt-verifier",
       async authenticate(ctx) {
+        // Example logs
         if (ctx.state.user) {
           // request is already authenticated in a different way
-          return { authenticated: true };
+          logger.info("User already authed", {
+            color: "green",
+            user: ctx.state.user,
+          });
+          return { authenticated: true, credentials: ctx.state.user };
         }
-        console.log("here", ctx);
 
         if (
           ctx.request &&
@@ -35,7 +40,6 @@ module.exports = {
             });
 
             const userData = data.data;
-            console.log("userData", userData);
 
             const nomadUser = await strapi.db
               .query(`api::auth-user.auth-user`)
@@ -46,22 +50,29 @@ module.exports = {
               });
 
             if (nomadUser) {
+              logger.info("User from DB", { color: "green", user: nomadUser });
               ctx.state.user = nomadUser;
               ctx.state.user.sub = userData.sub;
               return { authenticated: true, credentials: nomadUser };
             }
 
             if (userData) {
+              logger.info("New user added to DB", {
+                color: "green",
+                user: userData,
+              });
               ctx.state.user = userData;
               return { authenticated: true, credentials: userData };
             }
             return { authenticated: false };
           } catch (error) {
+            logger.error("User login error ", { color: "red", error });
             return ctx.unauthorized(error);
           }
         }
 
         // Execute the action.
+        logger.warn("User login unsuccessful ", { color: "yellow" });
         return { authenticated: false };
       },
     });
