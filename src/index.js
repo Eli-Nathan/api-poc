@@ -19,7 +19,6 @@ module.exports = {
         if (ctx.state.user) {
           // request is already authenticated in a different way
           logger.info("User already authed", {
-            color: "green",
             user: ctx.state.user,
           });
           return { authenticated: true, credentials: ctx.state.user };
@@ -50,7 +49,7 @@ module.exports = {
               });
 
             if (nomadUser) {
-              logger.info("User from DB", { color: "green", user: nomadUser });
+              logger.info("User from DB", { user: nomadUser });
               ctx.state.user = nomadUser;
               ctx.state.user.sub = userData.sub;
               return { authenticated: true, credentials: nomadUser };
@@ -58,7 +57,6 @@ module.exports = {
 
             if (userData) {
               logger.info("New user added to DB", {
-                color: "green",
                 user: userData,
               });
               ctx.state.user = userData;
@@ -66,13 +64,13 @@ module.exports = {
             }
             return { authenticated: false };
           } catch (error) {
-            logger.error("User login error ", { color: "red", error });
+            logger.error("User login error ", { error });
             return ctx.unauthorized(error);
           }
         }
 
         // Execute the action.
-        logger.warn("User login unsuccessful ", { color: "yellow" });
+        logger.warn("User login unsuccessful");
         return { authenticated: false };
       },
     });
