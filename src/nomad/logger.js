@@ -13,10 +13,7 @@ const logger = createLogger({
   level: "info",
   exitOnError: false,
   format: format.json(),
-  transports:
-    ENV === "production"
-      ? [new transports.Http(httpTransportOptions)]
-      : [new transports.Console()],
+  transports: [new transports.Console()],
 });
 
 module.exports = logger;
