@@ -20,7 +20,7 @@ module.exports = async (ctx, config, { strapi }) => {
     }
     ctx.request.body.data.name = name;
     logger.info("New user added to DB", {
-      user: userData,
+      user: userDetails,
     });
     return true;
   }
