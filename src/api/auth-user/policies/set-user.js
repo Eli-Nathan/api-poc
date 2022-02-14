@@ -1,3 +1,4 @@
+const logger = require("../../../nomad/logger");
 module.exports = async (ctx, config, { strapi }) => {
   if (ctx.state.user) {
     if (!ctx.request.body) {
