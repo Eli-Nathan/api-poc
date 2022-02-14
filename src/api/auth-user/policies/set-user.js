@@ -15,6 +15,11 @@ module.exports = async (ctx, config, { strapi }) => {
     let name;
     if (userDetails.name) {
       name = userDetails.name;
+    } else if (
+      ctx.request.body.data.firstName &&
+      ctx.request.body.data.lastName
+    ) {
+      name = `${ctx.request.body.data.firstName} ${ctx.request.body.data.lastName}`;
     } else if (userDetails.givenName && userDetails.familyName) {
       name = `${userDetails.givenName} ${userDetails.familyName}`;
     }
