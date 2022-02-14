@@ -1,8 +1,12 @@
 "use strict";
 const axios = require("axios");
+const { initializeApp, applicationDefault } = require("firebase-admin/app");
+const authAdmin = require("firebase-admin/auth");
 const logger = require("./nomad/logger");
 
-const auth0domain = process.env.AUTH0_DOMAIN;
+initializeApp({
+  credential: applicationDefault(),
+});
 
 module.exports = {
   /**
@@ -13,7 +17,7 @@ module.exports = {
    */
   register({ strapi }) {
     strapi.container.get("auth").register("content-api", {
-      name: "auth0-jwt-verifier",
+      name: "firebase-jwt-verifier",
       async authenticate(ctx) {
         // Example logs
         if (ctx.state.user) {
@@ -30,15 +34,11 @@ module.exports = {
           ctx.request.header.authorization
         ) {
           try {
-            const data = await axios({
-              method: "POST",
-              url: auth0domain,
-              headers: {
-                Authorization: ctx.request.header.authorization,
-              },
-            });
-
-            const userData = data.data;
+            const token = ctx.request.header.authorization.replace(
+              "Bearer ",
+              ""
+            );
+            const userData = await authAdmin.getAuth().verifyIdToken(token);
 
             const nomadUser = await strapi.db
               .query(`api::auth-user.auth-user`)
@@ -64,7 +64,7 @@ module.exports = {
             }
             return { authenticated: false };
           } catch (error) {
-            logger.error("User login error ", { error });
+            logger.error("User login error ", error);
             return ctx.unauthorized(error);
           }
         }
