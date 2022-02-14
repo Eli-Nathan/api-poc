@@ -17,8 +17,14 @@ module.exports = async (ctx, config, { strapi }) => {
       name = `${userDetails.givenName} ${userDetails.familyName}`;
     }
     ctx.request.body.data.name = name;
+    logger.info("New user added to DB", {
+      user: userData,
+    });
     return true;
   }
 
+  logger.warn("Failed to add new user to DB", {
+    user: userData,
+  });
   return false; // If you return nothing, Strapi considers you didn't want to block the request and will let it pass
 };

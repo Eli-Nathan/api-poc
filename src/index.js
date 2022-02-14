@@ -56,9 +56,6 @@ module.exports = {
             }
 
             if (userData) {
-              logger.info("New user added to DB", {
-                user: userData,
-              });
               ctx.state.user = userData;
               return { authenticated: true, credentials: userData };
             }
