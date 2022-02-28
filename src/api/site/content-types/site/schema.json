@@ -58,18 +58,6 @@
     "email": {
       "type": "email"
     },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "camp",
-        "tent",
-        "walk",
-        "historic",
-        "munro",
-        "beach",
-        "woods"
-      ]
-    },
     "priority": {
       "type": "integer",
       "default": 0,
@@ -77,17 +65,23 @@
       "min": 0
     },
     "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
     },
     "edit_requests": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::edit-request.edit-request",
       "mappedBy": "site"
+    },
+    "type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::site-type.site-type"
     }
   }
 }

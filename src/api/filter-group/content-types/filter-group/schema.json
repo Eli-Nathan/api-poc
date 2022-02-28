@@ -1,0 +1,32 @@
+{
+  "kind": "collectionType",
+  "collectionName": "filter_groups",
+  "info": {
+    "singularName": "filter-group",
+    "pluralName": "filter-groups",
+    "displayName": "Filter groups",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "items": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::site-type.site-type"
+    },
+    "shouldShowTitle": {
+      "type": "boolean",
+      "default": true
+    },
+    "priority": {
+      "type": "integer"
+    }
+  }
+}

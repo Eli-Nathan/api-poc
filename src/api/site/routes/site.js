@@ -4,6 +4,19 @@
  * site router.
  */
 
-const { createCoreRouter } = require("@strapi/strapi").factories;
-
-module.exports = createCoreRouter("api::site.site");
+module.exports = {
+  routes: [
+    {
+      method: "GET",
+      path: "/sites",
+      handler: "site.find",
+      middlewares: ["populate-sites"],
+    },
+    {
+      method: "GET",
+      path: "/sites/:id",
+      handler: "site.findOne",
+      middlewares: ["populate-sites"],
+    },
+  ],
+};

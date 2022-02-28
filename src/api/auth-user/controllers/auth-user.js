@@ -13,8 +13,10 @@ const populateList = [
   "addition_requests",
   "edit_requests",
   "edit_requests.site",
+  "edit_requests.site.type",
   "user_routes",
   "favourites",
+  "favourites.type",
   "profile_pic",
 ];
 

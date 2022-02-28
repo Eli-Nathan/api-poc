@@ -25,4 +25,5 @@ module.exports = [
   "api::user-route.populate-user-routes",
   "api::addition-request.populate-additions",
   "api::edit-request.populate-edits",
+  "api::site.populate-sites",
 ];
