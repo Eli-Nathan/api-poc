@@ -1,9 +1,9 @@
-'use strict';
+"use strict";
 
 /**
  * filter-group router.
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
+const { createCoreRouter } = require("@strapi/strapi").factories;
 
-module.exports = createCoreRouter('api::filter-group.filter-group');
+module.exports = createCoreRouter("api::filter-group.filter-group");
