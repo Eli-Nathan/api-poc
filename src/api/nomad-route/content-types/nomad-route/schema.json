@@ -4,7 +4,8 @@
   "info": {
     "singularName": "nomad-route",
     "pluralName": "nomad-routes",
-    "displayName": "Nomad routes"
+    "displayName": "Nomad routes",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,20 +16,25 @@
       "type": "string",
       "required": true
     },
-    "distances": {
-      "type": "json"
-    },
-    "sites": {
-      "type": "component",
-      "repeatable": true,
-      "component": "order.sites"
-    },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "waypoints": {
+      "type": "json",
+      "required": false
+    },
+    "origin": {
+      "type": "json",
+      "required": true
+    },
+    "destination": {
+      "type": "json",
+      "required": true
     }
   }
 }
