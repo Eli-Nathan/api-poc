@@ -35,6 +35,9 @@
     "destination": {
       "type": "json",
       "required": true
+    },
+    "polyline": {
+      "type": "json"
     }
   }
 }
