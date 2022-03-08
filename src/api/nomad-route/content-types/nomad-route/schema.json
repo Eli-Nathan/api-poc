@@ -38,6 +38,15 @@
     },
     "polyline": {
       "type": "json"
+    },
+    "site": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::site.site",
+      "inversedBy": "nomad_routes"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

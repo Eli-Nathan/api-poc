@@ -82,6 +82,12 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::site-type.site-type"
+    },
+    "nomad_routes": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::nomad-route.nomad-route",
+      "mappedBy": "site"
     }
   }
 }
