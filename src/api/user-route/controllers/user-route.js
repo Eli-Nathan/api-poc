@@ -35,5 +35,18 @@ module.exports = createCoreController(
       const routes = await super.find({ query });
       return this.sanitizeOutput(routes, ctx);
     },
+
+    // findOnePublic method
+    async findOnePublic(ctx) {
+      const query = {
+        ...ctx.query,
+        filters: {
+          public: true,
+        },
+      };
+
+      const routes = await super.findOne({ query });
+      return this.sanitizeOutput(routes, ctx);
+    },
   })
 );

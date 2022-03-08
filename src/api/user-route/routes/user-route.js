@@ -37,6 +37,18 @@ module.exports = {
       },
     },
     {
+      method: "GET",
+      path: "/user-routes/public/:id",
+      handler: "user-route.findOnePublic",
+      middlewares: ["populate-user-routes"],
+      config: {
+        policies: [
+          "plugin::users-permissions.isAuthed",
+          "global::is-not-owner",
+        ],
+      },
+    },
+    {
       method: "POST",
       path: "/user-routes",
       handler: "user-route.create",

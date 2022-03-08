@@ -18,10 +18,10 @@ module.exports = async (policyContext, config, { strapi }) => {
         .query(`api::${apiName}.${controllerName}`)
         .findMany({
           where: {
-            $not: {
-              owner: policyContext.state.user.id,
-            },
             ...idQuery,
+            owner: {
+              $not: policyContext.state.user.id,
+            },
           },
         });
     }
