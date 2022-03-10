@@ -21,10 +21,7 @@ module.exports = {
       handler: "user-route.findPublic",
       middlewares: ["populate-user-routes"],
       config: {
-        policies: [
-          "plugin::users-permissions.isAuthed",
-          "global::is-not-owner",
-        ],
+        policies: ["plugin::users-permissions.isAuthed"],
       },
     },
     {
@@ -42,10 +39,7 @@ module.exports = {
       handler: "user-route.findOnePublic",
       middlewares: ["populate-user-routes"],
       config: {
-        policies: [
-          "plugin::users-permissions.isAuthed",
-          "global::is-not-owner",
-        ],
+        policies: ["plugin::users-permissions.isAuthed"],
       },
     },
     {

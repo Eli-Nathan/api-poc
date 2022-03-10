@@ -29,6 +29,7 @@ module.exports = createCoreController(
         ...ctx.query,
         filters: {
           public: true,
+          owner: { $not: ctx.state.user.id },
         },
       };
 
