@@ -17,15 +17,11 @@ module.exports = createCoreController(
       if (!ctx.query) {
         ctx.query = {};
       }
-      const currentPopulateList = ctx.query.populate || [];
-      const query = {
-        ...ctx.query,
-        filters: {
-          populate: currentPopulateList,
-          owner: ctx.state.user.id,
-        },
-      };
-      const routes = await super.find({ query });
+      if (!ctx.query.filters) {
+        ctx.query.filters = {};
+      }
+      ctx.query.filters.owner = ctx.state.user.id;
+      const routes = await super.find(ctx);
       return this.sanitizeOutput(routes, ctx);
     },
 
@@ -42,29 +38,28 @@ module.exports = createCoreController(
 
     // findPublic method
     async findPublic(ctx) {
-      const query = {
-        ...ctx.query,
-        filters: {
-          public: true,
-          owner: { $not: ctx.state.user.id },
-        },
-      };
+      if (!ctx.query) {
+        ctx.query = {};
+      }
+      if (!ctx.query.filters) {
+        ctx.query.filters = {};
+      }
+      ctx.query.filters.owner = { $not: ctx.state.user.id };
 
-      const routes = await super.find({ query });
+      const routes = await super.find(ctx);
       return this.sanitizeOutput(routes, ctx);
     },
 
     // findOnePublic method
     async findOnePublic(ctx) {
-      const query = {
-        ...ctx.query,
-        filters: {
-          public: true,
-          owner: { $not: ctx.state.user.id },
-        },
-      };
-
-      const routes = await super.findOne({ query });
+      if (!ctx.query) {
+        ctx.query = {};
+      }
+      if (!ctx.query.filters) {
+        ctx.query.filters = {};
+      }
+      ctx.query.filters.owner = { $not: ctx.state.user.id };
+      const routes = await super.findOne(ctx);
       return this.sanitizeOutput(routes, ctx);
     },
   })
