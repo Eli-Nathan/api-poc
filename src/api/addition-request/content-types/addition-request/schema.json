@@ -44,18 +44,6 @@
     "email": {
       "type": "email"
     },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "camp",
-        "tent",
-        "walk",
-        "historic",
-        "munro",
-        "beach",
-        "woods"
-      ]
-    },
     "status": {
       "type": "enumeration",
       "enum": [
@@ -80,6 +68,11 @@
       "relation": "manyToOne",
       "target": "api::auth-user.auth-user",
       "inversedBy": "addition_requests"
+    },
+    "type": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::site-type.site-type"
     }
   }
 }

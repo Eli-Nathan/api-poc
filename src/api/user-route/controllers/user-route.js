@@ -12,6 +12,18 @@ const { parseMultipartData } = utils;
 module.exports = createCoreController(
   "api::user-route.user-route",
   ({ strapi }) => ({
+    // find method
+    async find(ctx) {
+      const query = {
+        ...ctx.query,
+        filters: {
+          owner: ctx.state.user.id,
+        },
+      };
+      const routes = await super.find({ query });
+      return this.sanitizeOutput(routes, ctx);
+    },
+
     // findOne method
     async findOne(ctx) {
       const route = await super.findOne(ctx);
@@ -43,6 +55,7 @@ module.exports = createCoreController(
         ...ctx.query,
         filters: {
           public: true,
+          owner: { $not: ctx.state.user.id },
         },
       };
 
