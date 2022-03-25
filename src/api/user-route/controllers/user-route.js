@@ -14,9 +14,14 @@ module.exports = createCoreController(
   ({ strapi }) => ({
     // find method
     async find(ctx) {
+      if (!ctx.query) {
+        ctx.query = {};
+      }
+      const currentPopulateList = ctx.query.populate || [];
       const query = {
         ...ctx.query,
         filters: {
+          populate: currentPopulateList,
           owner: ctx.state.user.id,
         },
       };
