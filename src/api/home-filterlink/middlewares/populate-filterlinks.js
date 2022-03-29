@@ -1,5 +1,4 @@
-// const populateList = ["*"];
-const populateList = ["sites", "sites.site", "sites.site.type"];
+const populateList = ["filter", "filter.items"];
 
 const enrichCtx = (ctx) => {
   if (!ctx.query) {
