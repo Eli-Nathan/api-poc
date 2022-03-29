@@ -23,6 +23,12 @@
     },
     "icon": {
       "type": "string"
+    },
+    "order": {
+      "type": "integer",
+      "default": 1,
+      "required": true,
+      "unique": false
     }
   }
 }
