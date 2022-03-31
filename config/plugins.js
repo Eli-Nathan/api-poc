@@ -13,5 +13,9 @@ module.exports = ({ env }) => {
         },
       },
     },
+    moderator: {
+      enabled: true,
+      resolve: "./src/plugins/moderator",
+    },
   };
 };

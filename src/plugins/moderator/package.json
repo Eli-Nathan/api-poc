@@ -1,0 +1,24 @@
+{
+  "name": "moderator",
+  "version": "0.0.0",
+  "description": "This is the description of the plugin.",
+  "strapi": {
+    "name": "moderator",
+    "description": "Description of moderator plugin",
+    "kind": "plugin"
+  },
+  "dependencies": {},
+  "author": {
+    "name": "Eli Nathan"
+  },
+  "maintainers": [
+    {
+      "name": "Eli Nathan"
+    }
+  ],
+  "engines": {
+    "node": ">=12.x. <=16.x.x",
+    "npm": ">=6.0.0"
+  },
+  "license": "MIT"
+}
