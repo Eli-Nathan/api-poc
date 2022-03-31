@@ -24,4 +24,28 @@ module.exports = {
       edits,
     };
   },
+  async reject(ctx) {
+    const { params } = ctx;
+    const rejected = await strapi
+      .plugin("moderator")
+      .service("moderator")
+      .rejectRequest(params.collection, params.id);
+    ctx.body = rejected;
+  },
+  async approveAddition(ctx) {
+    const { params } = ctx;
+    const approved = await strapi
+      .plugin("moderator")
+      .service("moderator")
+      .approveAddition(params.id);
+    ctx.body = approved;
+  },
+  async approveEdit(ctx) {
+    const { params } = ctx;
+    const approved = await strapi
+      .plugin("moderator")
+      .service("moderator")
+      .approveEdit(params.id);
+    ctx.body = approved;
+  },
 };

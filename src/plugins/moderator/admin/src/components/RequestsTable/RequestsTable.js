@@ -19,7 +19,13 @@ import {
   TabPanel,
 } from "@strapi/design-system/Tabs";
 
-const TabContent = ({ collection, name }) => {
+const TabContent = ({
+  collection,
+  name,
+  rejectRequest,
+  approveRequest,
+  initialSelectedTabIndex,
+}) => {
   return (
     <TabPanel>
       {/* TABLE */}
@@ -31,6 +37,9 @@ const TabContent = ({ collection, name }) => {
             </Th>
             <Th>
               <Typography variant="sigma">User</Typography>
+            </Th>
+            <Th>
+              <Typography variant="sigma">Status</Typography>
             </Th>
           </Tr>
         </Thead>
@@ -53,6 +62,9 @@ const TabContent = ({ collection, name }) => {
                   )}
                 </Td>
                 <Td>
+                  <Typography textColor="neutral800">{item.status}</Typography>
+                </Td>
+                <Td>
                   <Flex justifyContent="right" alignItems="right">
                     <LinkButton
                       to={`/content-manager/collectionType/api::${name}.${name}/${item.id}`}
@@ -62,14 +74,19 @@ const TabContent = ({ collection, name }) => {
                       View
                     </LinkButton>
                     <Button
+                      onClick={() => approveRequest(name, item.id)}
                       variant="success-light"
                       startIcon={<Check />}
                       style={{ marginRight: 12 }}
                     >
                       Complete
                     </Button>
-                    <Button variant="danger-light" startIcon={<Close />}>
-                      Delete
+                    <Button
+                      onClick={() => rejectRequest(name, item.id)}
+                      variant="danger-light"
+                      startIcon={<Close />}
+                    >
+                      Reject
                     </Button>
                   </Flex>
                 </Td>
@@ -78,7 +95,6 @@ const TabContent = ({ collection, name }) => {
           ) : (
             <Box padding={8} background="neutral0">
               <EmptyStateLayout
-                icon={<Illo />}
                 content={`You don't have any ${name}s yet...`}
               />
             </Box>
@@ -91,10 +107,19 @@ const TabContent = ({ collection, name }) => {
   );
 };
 
-const RequestsTable = ({ requests }) => {
+const RequestsTable = ({
+  requests,
+  rejectRequest,
+  approveRequest,
+  initialSelectedTabIndex,
+}) => {
   return (
     <Box padding={8}>
-      <TabGroup label="label" id="tabs">
+      <TabGroup
+        label="label"
+        id="tabs"
+        initialSelectedTabIndex={initialSelectedTabIndex}
+      >
         <Tabs>
           <Tab>
             <Typography variant="omega">Addition requests</Typography>
@@ -104,8 +129,18 @@ const RequestsTable = ({ requests }) => {
           </Tab>
         </Tabs>
         <TabPanels>
-          <TabContent collection={requests.additions} name="addition-request" />
-          <TabContent collection={requests.edits} name="edit-request" />
+          <TabContent
+            collection={requests.additions}
+            name="addition-request"
+            rejectRequest={rejectRequest}
+            approveRequest={approveRequest}
+          />
+          <TabContent
+            collection={requests.edits}
+            name="edit-request"
+            rejectRequest={rejectRequest}
+            approveRequest={approveRequest}
+          />
         </TabPanels>
       </TabGroup>
     </Box>
