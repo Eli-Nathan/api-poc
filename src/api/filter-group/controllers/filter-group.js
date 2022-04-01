@@ -26,7 +26,7 @@ const enrichCtx = (ctx) => {
 module.exports = createCoreController(
   "api::filter-group.filter-group",
   ({ strapi }) => ({
-    // findMe method
+    // find method
     async find(ctx) {
       const enrichedcCtx = enrichCtx(ctx);
       const filterGroups = await super.find(ctx);

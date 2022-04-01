@@ -74,6 +74,12 @@
       "relation": "oneToMany",
       "target": "api::edit-request.edit-request",
       "mappedBy": "owner"
+    },
+    "comments": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::comment.comment",
+      "mappedBy": "owner"
     }
   }
 }

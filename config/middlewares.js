@@ -33,6 +33,7 @@ module.exports = [
   "api::addition-request.populate-additions",
   "api::edit-request.populate-edits",
   "api::site.populate-sites",
+  "api::site.populate-site",
   "api::home-filterlink.populate-filterlinks",
   "api::comment.populate-comments",
 ];

@@ -16,7 +16,7 @@ module.exports = {
       method: "GET",
       path: "/sites/:id",
       handler: "site.findOne",
-      middlewares: ["populate-sites"],
+      middlewares: ["populate-site"],
     },
   ],
 };

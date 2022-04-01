@@ -21,8 +21,9 @@
     },
     "owner": {
       "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::auth-user.auth-user"
+      "relation": "manyToOne",
+      "target": "api::auth-user.auth-user",
+      "inversedBy": "comments"
     },
     "status": {
       "type": "enumeration",
