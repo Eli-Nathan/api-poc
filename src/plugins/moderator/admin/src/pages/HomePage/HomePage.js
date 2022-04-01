@@ -47,10 +47,12 @@ const HomePage = () => {
     setIsLoading(true);
     await approveRequest(approveItem.collection, approveItem.id);
     requests.current = await fetchAllRequests();
-    setIsLoading(false);
     if (approveItem.collection === "edit-request") {
       setInitialSelectedTabIndex(1);
+    } else if (approveItem.collection === "comment") {
+      setInitialSelectedTabIndex(2);
     }
+    setIsLoading(false);
   };
 
   const reject = async () => {
@@ -58,10 +60,12 @@ const HomePage = () => {
     setIsLoading(true);
     await rejectRequest(rejectItem.collection, rejectItem.id);
     requests.current = await fetchAllRequests();
-    setIsLoading(false);
     if (rejectItem.collection === "edit-request") {
       setInitialSelectedTabIndex(1);
+    } else if (approveItem.collection === "comment") {
+      setInitialSelectedTabIndex(2);
     }
+    setIsLoading(false);
   };
 
   useEffect(async () => {

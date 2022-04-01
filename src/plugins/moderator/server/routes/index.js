@@ -46,6 +46,15 @@ module.exports = [
   },
   {
     method: "GET",
+    path: "/approve-comment/:id",
+    handler: "moderator.approveComment",
+    config: {
+      auth: false,
+      policies: [],
+    },
+  },
+  {
+    method: "GET",
     path: "/approve-edit-request/:id",
     handler: "moderator.approveEdit",
     config: {

@@ -127,6 +127,9 @@ const RequestsTable = ({
           <Tab>
             <Typography variant="omega">Edit requests</Typography>
           </Tab>
+          <Tab>
+            <Typography variant="omega">Comments</Typography>
+          </Tab>
         </Tabs>
         <TabPanels>
           <TabContent
@@ -138,6 +141,12 @@ const RequestsTable = ({
           <TabContent
             collection={requests.edits}
             name="edit-request"
+            rejectRequest={rejectRequest}
+            approveRequest={approveRequest}
+          />
+          <TabContent
+            collection={requests.comments}
+            name="comment"
             rejectRequest={rejectRequest}
             approveRequest={approveRequest}
           />

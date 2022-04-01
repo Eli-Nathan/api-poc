@@ -1,5 +1,10 @@
 "use strict";
 
+const {
+  getRejectedMailContent,
+  sendEmail,
+} = require("../../../../nomad/emails");
+
 module.exports = ({ strapi }) => ({
   async getAdditions() {
     const additions = await strapi.db
@@ -52,6 +57,30 @@ module.exports = ({ strapi }) => ({
     return edits;
   },
 
+  async getComments() {
+    const comments = await strapi.db.query("api::comment.comment").findMany({
+      where: {
+        $and: [
+          {
+            status: {
+              $not: "rejected",
+            },
+          },
+          {
+            status: {
+              $not: "complete",
+            },
+          },
+        ],
+      },
+      populate: {
+        owner: true,
+        site: true,
+      },
+    });
+    return comments;
+  },
+
   async rejectRequest(collection, id) {
     const rejected = await strapi.db
       .query(`api::${collection}.${collection}`)
@@ -67,6 +96,17 @@ module.exports = ({ strapi }) => ({
           site: true,
         },
       });
+    const { text, html, subject } = getRejectedMailContent(
+      collection,
+      rejected.title
+    );
+    await sendEmail({
+      strapi,
+      subject,
+      address: rejected.owner.email,
+      text,
+      html,
+    });
     return rejected;
   },
 
@@ -104,6 +144,37 @@ module.exports = ({ strapi }) => ({
         status: "complete",
       },
     });
+    return approved;
+  },
+
+  async approveComment(id) {
+    const comment = await strapi.db.query(`api::comment.comment`).findOne({
+      where: { id },
+      populate: {
+        owner: true,
+        type: true,
+      },
+    });
+    await strapi.db.query(`api::comment.comment`).update({
+      where: { id: comment.id },
+      data: {
+        status: "complete",
+      },
+    });
+    if (comment.owner) {
+      const currentUser = await strapi.db
+        .query(`api::auth-user.auth-user`)
+        .findOne({
+          where: { id: comment.owner.id },
+        });
+
+      await strapi.db.query(`api::auth-user.auth-user`).update({
+        where: { id: currentUser.id },
+        data: {
+          score: currentUser.score + 10,
+        },
+      });
+    }
     return approved;
   },
 

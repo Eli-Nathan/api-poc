@@ -34,4 +34,5 @@ module.exports = [
   "api::edit-request.populate-edits",
   "api::site.populate-sites",
   "api::home-filterlink.populate-filterlinks",
+  "api::comment.populate-comments",
 ];

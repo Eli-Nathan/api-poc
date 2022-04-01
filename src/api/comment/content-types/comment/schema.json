@@ -1,0 +1,39 @@
+{
+  "kind": "collectionType",
+  "collectionName": "comments",
+  "info": {
+    "singularName": "comment",
+    "pluralName": "comments",
+    "displayName": "Comments",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "comment": {
+      "type": "text"
+    },
+    "owner": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::auth-user.auth-user"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "submitted",
+        "pending",
+        "moderating",
+        "rejected",
+        "complete"
+      ],
+      "default": "submitted"
+    }
+  }
+}
