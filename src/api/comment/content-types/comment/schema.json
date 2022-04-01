@@ -34,6 +34,12 @@
         "complete"
       ],
       "default": "submitted"
+    },
+    "site": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::site.site",
+      "inversedBy": "comments"
     }
   }
 }
