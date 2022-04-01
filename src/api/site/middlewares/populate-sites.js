@@ -1,4 +1,4 @@
-const populateList = ["type"];
+const populateList = ["type", "comments"];
 
 const enrichCtx = (ctx) => {
   if (!ctx.query) {
