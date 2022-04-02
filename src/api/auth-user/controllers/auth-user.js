@@ -18,6 +18,8 @@ const populateList = [
   "favourites",
   "favourites.type",
   "profile_pic",
+  "comments",
+  "comments.site",
 ];
 
 const enrichCtx = (ctx) => {

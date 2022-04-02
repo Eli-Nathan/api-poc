@@ -171,7 +171,7 @@ module.exports = ({ strapi }) => ({
       await strapi.db.query(`api::auth-user.auth-user`).update({
         where: { id: currentUser.id },
         data: {
-          score: currentUser.score + 10,
+          score: currentUser.score + 1,
         },
       });
     }
