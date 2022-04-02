@@ -19,8 +19,7 @@
       "required": true
     },
     "latlng": {
-      "type": "string",
-      "unique": true
+      "type": "string"
     },
     "description": {
       "type": "text"
@@ -68,9 +67,7 @@
       "type": "media",
       "multiple": true,
       "required": false,
-      "allowedTypes": [
-        "images"
-      ]
+      "allowedTypes": ["images"]
     },
     "edit_requests": {
       "type": "relation",
