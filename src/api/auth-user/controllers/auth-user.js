@@ -41,6 +41,15 @@ module.exports = createCoreController(
       return this.sanitizeOutput(user, ctx);
     },
 
+    // verify email method
+    async verifyEmail(ctx) {
+      const enrichedcCtx = enrichCtx(ctx);
+      const userDetails = ctx.state.user;
+      ctx.request.body = { data: { isVerified: userDetails.email_verified } };
+      const user = await super.update(ctx);
+      return this.sanitizeOutput(user, ctx);
+    },
+
     // update method
     async update(ctx) {
       const enrichedcCtx = enrichCtx(ctx);

@@ -4,11 +4,6 @@ module.exports = async (policyContext, config, { strapi }) => {
     policyContext.state.user.id &&
     policyContext.state.route
   ) {
-    // Get api name
-    const apiName = policyContext.state.route.info.apiName;
-    // Get controllerName
-    const controllerName = policyContext.state.route.handler.split(".")[0];
-
     // Query db for items with owner as current user (and ID if present in request)
     const entity = await strapi.db.query(`api::auth-user.auth-user`).findOne({
       where: {

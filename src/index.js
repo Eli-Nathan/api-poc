@@ -48,6 +48,13 @@ module.exports = {
                 },
               });
 
+            if (nomadUser && userData) {
+              const mergedData = { ...userData, ...nomadUser };
+              logger.info("User from DB", { user: mergedData });
+              ctx.state.user = mergedData;
+              return { authenticated: true, credentials: mergedData };
+            }
+
             if (nomadUser) {
               logger.info("User from DB", { user: nomadUser });
               ctx.state.user = nomadUser;

@@ -30,5 +30,13 @@ module.exports = {
         policies: ["plugin::users-permissions.isAuthed", "is-user"],
       },
     },
+    {
+      method: "PUT",
+      path: "/auth-users/me/verifyEmail",
+      handler: "auth-user.verifyEmail",
+      config: {
+        policies: ["plugin::users-permissions.isAuthed", "is-user"],
+      },
+    },
   ],
 };
