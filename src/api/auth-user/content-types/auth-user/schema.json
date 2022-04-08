@@ -80,6 +80,14 @@
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "owner"
+    },
+    "isVerified": {
+      "type": "boolean",
+      "default": false
+    },
+    "allowMarketing": {
+      "type": "boolean",
+      "default": false
     }
   }
 }
