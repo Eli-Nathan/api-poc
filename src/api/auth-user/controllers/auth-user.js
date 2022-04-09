@@ -20,6 +20,7 @@ const populateList = [
   "profile_pic",
   "comments",
   "comments.site",
+  "role",
 ];
 
 const enrichCtx = (ctx) => {
@@ -54,6 +55,29 @@ module.exports = createCoreController(
     async update(ctx) {
       const enrichedcCtx = enrichCtx(ctx);
       const user = await super.update(ctx);
+      return this.sanitizeOutput(user, ctx);
+    },
+
+    // create method
+    async create(ctx) {
+      if (!ctx.request.body) {
+        ctx.request.body = {};
+      }
+      if (!ctx.request.body.data) {
+        ctx.request.body.data = {};
+      }
+
+      const baseRole = await strapi.db
+        .query(`api::user-role.user-role`)
+        .findOne({
+          where: {
+            level: 0,
+          },
+        });
+
+      ctx.request.body.data.role = baseRole.id;
+      const enrichedcCtx = enrichCtx(ctx);
+      const user = await super.create(ctx);
       return this.sanitizeOutput(user, ctx);
     },
   })

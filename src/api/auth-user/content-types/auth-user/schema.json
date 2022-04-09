@@ -88,6 +88,12 @@
     "allowMarketing": {
       "type": "boolean",
       "default": false
+    },
+    "role": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::user-role.user-role",
+      "inversedBy": "users"
     }
   }
 }

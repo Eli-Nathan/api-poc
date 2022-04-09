@@ -23,14 +23,14 @@ module.exports = (plugin) => {
         if (nomadUser) {
           ctx.state.user = nomadUser;
           ctx.state.user.sub = userData.sub;
-          return { authenticated: true, credentials: nomadUser };
+          return true;
         }
 
         if (userData) {
           ctx.state.user = userData;
-          return { authenticated: true, credentials: userData };
+          return true;
         }
-        return { authenticated: false };
+        return false;
       } catch (error) {
         return ctx.unauthorized(error);
       }
