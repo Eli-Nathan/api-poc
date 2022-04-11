@@ -37,29 +37,43 @@ module.exports = createCoreController(
   ({ strapi }) => ({
     // findMe method
     async findMe(ctx) {
-      const enrichedcCtx = enrichCtx(ctx);
-      const user = await super.findOne(ctx);
+      const enrichedCtx = enrichCtx(ctx);
+      const user = await super.findOne(enrichedCtx);
       return this.sanitizeOutput(user, ctx);
     },
 
     // verify email method
     async verifyEmail(ctx) {
-      const enrichedcCtx = enrichCtx(ctx);
+      const enrichedCtx = enrichCtx(ctx);
       const userDetails = ctx.state.user;
       ctx.request.body = { data: { isVerified: userDetails.email_verified } };
-      const user = await super.update(ctx);
+      const user = await super.update(enrichedCtx);
       return this.sanitizeOutput(user, ctx);
     },
 
-    // update method
-    async update(ctx) {
-      const enrichedcCtx = enrichCtx(ctx);
-      const user = await super.update(ctx);
+    // updateFavourites method
+    async updateFavourites(ctx) {
+      const enrichedCtx = enrichCtx(ctx);
+      if (!enrichedCtx.request.body) {
+        enrichedCtx.request.body = {};
+      }
+      if (!enrichedCtx.request.body.data) {
+        enrichedCtx.request.body.data = {};
+      }
+      if (!enrichedCtx.request.body.data.favourites) {
+        enrichedCtx.request.body.data.favourites = {};
+      }
+      const { favourites } = enrichedCtx.request.body.data;
+      enrichedCtx.request.body.data = {
+        favourites,
+      };
+      const user = await super.update(enrichedCtx);
       return this.sanitizeOutput(user, ctx);
     },
 
     // create method
     async create(ctx) {
+      const enrichedCtx = enrichCtx(ctx);
       if (!ctx.request.body) {
         ctx.request.body = {};
       }
@@ -76,8 +90,7 @@ module.exports = createCoreController(
         });
 
       ctx.request.body.data.role = baseRole.id;
-      const enrichedcCtx = enrichCtx(ctx);
-      const user = await super.create(ctx);
+      const user = await super.create(enrichedCtx);
       return this.sanitizeOutput(user, ctx);
     },
   })

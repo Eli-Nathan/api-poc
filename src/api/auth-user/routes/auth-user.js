@@ -24,8 +24,8 @@ module.exports = {
     },
     {
       method: "PUT",
-      path: "/auth-users/:id",
-      handler: "auth-user.update",
+      path: "/auth-users/favourites/:id",
+      handler: "auth-user.updateFavourites",
       config: {
         policies: ["plugin::users-permissions.isAuthed", "is-user"],
       },
