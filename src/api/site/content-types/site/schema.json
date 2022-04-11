@@ -67,7 +67,9 @@
       "type": "media",
       "multiple": true,
       "required": false,
-      "allowedTypes": ["images"]
+      "allowedTypes": [
+        "images"
+      ]
     },
     "edit_requests": {
       "type": "relation",
@@ -91,6 +93,12 @@
       "relation": "oneToMany",
       "target": "api::comment.comment",
       "mappedBy": "site"
+    },
+    "owners": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::auth-user.auth-user",
+      "inversedBy": "sites"
     }
   }
 }

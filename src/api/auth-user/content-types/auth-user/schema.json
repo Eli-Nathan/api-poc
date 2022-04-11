@@ -94,6 +94,12 @@
       "relation": "manyToOne",
       "target": "api::user-role.user-role",
       "inversedBy": "users"
+    },
+    "sites": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::site.site",
+      "inversedBy": "owners"
     }
   }
 }
