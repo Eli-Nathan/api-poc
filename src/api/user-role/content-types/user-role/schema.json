@@ -4,7 +4,8 @@
   "info": {
     "singularName": "user-role",
     "pluralName": "user-roles",
-    "displayName": "User roles"
+    "displayName": "User roles",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -24,6 +25,14 @@
       "relation": "oneToMany",
       "target": "api::auth-user.auth-user",
       "mappedBy": "role"
+    },
+    "maxImages": {
+      "type": "integer",
+      "default": 1
+    },
+    "maxDescriptionWords": {
+      "type": "integer",
+      "default": 50
     }
   }
 }

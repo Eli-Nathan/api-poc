@@ -22,6 +22,8 @@ const populateList = [
   "comments.site",
   "role",
   "sites",
+  "sites.type",
+  "sites.images",
 ];
 
 const enrichCtx = (ctx) => {
