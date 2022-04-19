@@ -25,6 +25,12 @@
     },
     "icon": {
       "type": "string"
+    },
+    "facilities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::facility.facility",
+      "inversedBy": "relevance"
     }
   }
 }

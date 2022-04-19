@@ -1,4 +1,4 @@
-const populateList = ["type", "facilities"];
+const populateList = ["relevance"];
 
 const enrichCtx = (ctx) => {
   if (!ctx.query) {

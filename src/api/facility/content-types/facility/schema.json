@@ -1,0 +1,29 @@
+{
+  "kind": "collectionType",
+  "collectionName": "facilities",
+  "info": {
+    "singularName": "facility",
+    "pluralName": "facilities",
+    "displayName": "Facilities"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "icon": {
+      "type": "string",
+      "required": true
+    },
+    "relevance": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::site-type.site-type",
+      "inversedBy": "facilities"
+    }
+  }
+}

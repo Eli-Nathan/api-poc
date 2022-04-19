@@ -187,13 +187,14 @@ module.exports = ({ strapi }) => ({
           owner: true,
           site: true,
           type: true,
+          facilities: true,
         },
       });
     const approved = await strapi.db.query(`api::site.site`).update({
       where: {
         id: edit.site.id,
       },
-      data: edit.data,
+      data: { images: edit.images, ...edit.data },
     });
     if (edit.owner) {
       const currentUser = await strapi.db

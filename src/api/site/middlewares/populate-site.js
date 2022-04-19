@@ -4,6 +4,7 @@ const populateList = [
   "comments.owner",
   "comments.site",
   "owners",
+  "facilities",
 ];
 
 const enrichCtx = (ctx) => {

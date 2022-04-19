@@ -45,6 +45,11 @@
       "relation": "manyToOne",
       "target": "api::auth-user.auth-user",
       "inversedBy": "edit_requests"
+    },
+    "facilities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::facility.facility"
     }
   }
 }

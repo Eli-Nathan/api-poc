@@ -36,4 +36,5 @@ module.exports = [
   "api::site.populate-site",
   "api::home-filterlink.populate-filterlinks",
   "api::comment.populate-comments",
+  "api::facility.populate-facilities",
 ];

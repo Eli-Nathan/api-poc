@@ -35,9 +35,6 @@
     "category": {
       "type": "string"
     },
-    "facilities": {
-      "type": "text"
-    },
     "maplink": {
       "type": "text"
     },
@@ -73,6 +70,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::site-type.site-type"
+    },
+    "facilities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::facility.facility"
     }
   }
 }
