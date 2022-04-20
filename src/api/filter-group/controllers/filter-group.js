@@ -9,7 +9,14 @@ const utils = require("@strapi/utils");
 
 const { parseMultipartData } = utils;
 
-const populateList = ["items"];
+const populateList = [
+  "items",
+  "filters",
+  "filters.filter",
+  "filters.filter.filter",
+  "filters.filter.filter.siteType",
+  "filters.filter.filter.facility",
+];
 
 const sortBy = ["priority"];
 const enrichCtx = (ctx) => {

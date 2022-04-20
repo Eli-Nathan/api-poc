@@ -27,6 +27,12 @@
     },
     "priority": {
       "type": "integer"
+    },
+    "filters": {
+      "displayName": "filters",
+      "type": "component",
+      "repeatable": true,
+      "component": "filter.filters"
     }
   }
 }
