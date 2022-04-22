@@ -16,11 +16,6 @@
       "type": "string",
       "required": true
     },
-    "items": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::site-type.site-type"
-    },
     "shouldShowTitle": {
       "type": "boolean",
       "default": true
