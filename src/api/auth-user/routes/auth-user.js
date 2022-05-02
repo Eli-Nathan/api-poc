@@ -32,6 +32,14 @@ module.exports = {
     },
     {
       method: "PUT",
+      path: "/auth-users/edit-profile",
+      handler: "auth-user.editProfile",
+      config: {
+        policies: ["plugin::users-permissions.isAuthed", "is-user"],
+      },
+    },
+    {
+      method: "PUT",
       path: "/auth-users/me/verifyEmail",
       handler: "auth-user.verifyEmail",
       config: {

@@ -45,6 +45,32 @@ module.exports = createCoreController(
       return this.sanitizeOutput(user, ctx);
     },
 
+    async editProfile(ctx) {
+      let dataToUpdate = {};
+      const enrichedCtx = enrichCtx(ctx);
+      if (!enrichedCtx.request.body) {
+        enrichedCtx.request.body = {};
+      }
+      if (!enrichedCtx.request.body.data) {
+        enrichedCtx.request.body.data = {};
+      }
+      if (enrichedCtx.request.body.data.name) {
+        dataToUpdate.name = enrichedCtx.request.body.data.name;
+      }
+      if (enrichedCtx.request.body.data.profilePic) {
+        dataToUpdate.profile_pic = enrichedCtx.request.body.data.profilePic;
+      }
+      if (enrichedCtx.request.body.data.profilePic) {
+        dataToUpdate.profile_pic = enrichedCtx.request.body.data.profilePic;
+      }
+      if (enrichedCtx.request.body.data.businessName) {
+        dataToUpdate.businessName = enrichedCtx.request.body.data.businessName;
+      }
+      enrichedCtx.request.body.data = dataToUpdate;
+      const user = await super.update(enrichedCtx);
+      return this.sanitizeOutput(user, ctx);
+    },
+
     // verify email method
     async verifyEmail(ctx) {
       const enrichedCtx = enrichCtx(ctx);

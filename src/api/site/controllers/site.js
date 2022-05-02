@@ -35,15 +35,21 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
               .findOne({
                 where: { id: comment.id, status: "complete" },
                 populate: {
-                  owner: true,
+                  owner: {
+                    populate: true,
+                  },
                 },
               });
             if (commentEntity) {
               return {
                 ...comment,
                 owner: {
-                  name: commentEntity.owner.name,
-                  avatar: commentEntity.owner.avatar,
+                  name:
+                    commentEntity.owner.businessName ||
+                    commentEntity.owner.name,
+                  avatar:
+                    commentEntity.owner?.profile_pic?.url ||
+                    commentEntity.owner.avatar,
                 },
               };
             }
