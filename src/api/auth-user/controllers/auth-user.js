@@ -1,5 +1,7 @@
 "use strict";
 
+const stripe = require("stripe")(process.env.STRIPE_SECRET);
+
 /**
  *  auth-user controller
  */
@@ -33,6 +35,10 @@ const enrichCtx = (ctx) => {
   const currentPopulateList = ctx.query.populate || [];
   ctx.query.populate = [...currentPopulateList, ...populateList];
   return ctx;
+};
+
+const calculateOrderAmount = (role) => {
+  return role.price;
 };
 
 module.exports = createCoreController(
@@ -121,6 +127,41 @@ module.exports = createCoreController(
       ctx.request.body.data.role = baseRole.id;
       const user = await super.create(enrichedCtx);
       return this.sanitizeOutput(user, ctx);
+    },
+
+    // setupPayment method
+    async setupPayment(ctx) {
+      const enrichedCtx = enrichCtx(ctx);
+      if (!ctx.request.body) {
+        ctx.request.body = {};
+      }
+      if (!ctx.request.body.data) {
+        ctx.request.body.data = {};
+      }
+
+      const paidRole = await strapi.db
+        .query(`api::user-role.user-role`)
+        .findOne({
+          where: {
+            level: ctx.request.body.data.level,
+          },
+        });
+
+      const orderAmount = calculateOrderAmount(paidRole);
+      const paymentIntent = await stripe.paymentIntents.create({
+        amount: orderAmount,
+        currency: "gbp",
+        automatic_payment_methods: {
+          enabled: true,
+        },
+      });
+
+      return this.sanitizeOutput(
+        {
+          clientSecret: paymentIntent.client_secret,
+        },
+        ctx
+      );
     },
   })
 );

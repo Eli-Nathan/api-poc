@@ -46,5 +46,13 @@ module.exports = {
         policies: ["plugin::users-permissions.isAuthed", "is-user"],
       },
     },
+    {
+      method: "POST",
+      path: "/auth-users/payments/setup",
+      handler: "auth-user.setupPayment",
+      config: {
+        policies: ["plugin::users-permissions.isAuthed", "is-user"],
+      },
+    },
   ],
 };

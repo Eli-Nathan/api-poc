@@ -33,6 +33,12 @@
     "maxDescriptionWords": {
       "type": "integer",
       "default": 50
+    },
+    "price": {
+      "type": "decimal",
+      "default": 0,
+      "required": true,
+      "min": 0
     }
   }
 }
