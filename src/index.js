@@ -46,9 +46,16 @@ module.exports = {
                 where: {
                   user_id: userData.sub,
                 },
+                populate: {
+                  role: true,
+                  sites: true,
+                },
               });
 
             if (nomadUser && userData) {
+              if (nomadUser.sites) {
+                nomadUser.siteCount = nomadUser.sites.length || 0;
+              }
               const mergedData = { ...userData, ...nomadUser };
               logger.info("User from DB", { user: mergedData });
               ctx.state.user = mergedData;

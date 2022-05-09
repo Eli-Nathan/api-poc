@@ -18,6 +18,9 @@ module.exports = (plugin) => {
             where: {
               user_id: userData.sub,
             },
+            populate: {
+              role: true,
+            },
           });
 
         if (nomadUser) {
