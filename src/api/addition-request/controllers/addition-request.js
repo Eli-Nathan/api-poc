@@ -12,12 +12,6 @@ module.exports = createCoreController(
   ({ strapi }) => ({
     // create method
     async create(ctx) {
-      console.log("addingBusiness", ctx.request.body.data.addingBusiness);
-      console.log("role high enough", ctx.state.user.role.level > 0);
-      console.log(
-        `siteCount: ${ctx.state.user.siteCount} < maxSites: ${ctx.state.user.maxSites}`,
-        (ctx.state.user.siteCount || 0) < (ctx.state.user.maxSites || 0)
-      );
       if (ctx.state.user) {
         if (
           ctx.request.body.data.addingBusiness &&

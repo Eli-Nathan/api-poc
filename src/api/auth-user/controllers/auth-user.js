@@ -12,6 +12,7 @@ const { parseMultipartData } = utils;
 const populateList = [
   "addition_requests",
   "edit_requests",
+  "saved_public_routes",
   "edit_requests.site",
   "edit_requests.site.type",
   "user_routes",
@@ -98,6 +99,54 @@ module.exports = createCoreController(
       };
       const user = await super.update(enrichedCtx);
       return this.sanitizeOutput(user, ctx);
+    },
+
+    // updateFavourites method
+    async updateSavedRoutes(ctx) {
+      const enrichedCtx = enrichCtx(ctx);
+      const routeId = enrichedCtx.request.body?.data?.route;
+      if (!routeId) {
+        return {
+          status: 400,
+          message: "Bad request",
+        };
+      }
+      const serverRoute = await strapi.db
+        .query("api::user-route.user-route")
+        .findOne({
+          where: {
+            id: routeId,
+          },
+        });
+
+      if (serverRoute.public) {
+        const currentUser = await this.findMe({
+          ...enrichedCtx,
+          params: { id: enrichedCtx.params.id },
+        });
+
+        const savedRoutes =
+          currentUser.data.attributes.saved_public_routes.data.map(
+            (r) => r.id
+          ) || [];
+        if (savedRoutes.includes(routeId)) {
+          enrichedCtx.request.body.data = {
+            saved_public_routes: savedRoutes.filter((r) => r !== routeId),
+          };
+        } else {
+          enrichedCtx.request.body.data = {
+            saved_public_routes: [...savedRoutes, routeId],
+          };
+        }
+        const user = await super.update(enrichedCtx);
+        return this.sanitizeOutput(user, ctx);
+      } else {
+        ctx.status = 400;
+        return {
+          status: 400,
+          message: "Cannot save a route that isn't public",
+        };
+      }
     },
 
     // create method

@@ -42,6 +42,12 @@
       "relation": "manyToOne",
       "target": "api::auth-user.auth-user",
       "inversedBy": "user_routes"
+    },
+    "saved_by": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::auth-user.auth-user",
+      "inversedBy": "saved_public_routes"
     }
   }
 }

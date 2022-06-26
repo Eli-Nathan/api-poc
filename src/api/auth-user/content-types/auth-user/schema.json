@@ -108,6 +108,12 @@
     },
     "businessName": {
       "type": "string"
+    },
+    "saved_public_routes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::user-route.user-route",
+      "inversedBy": "saved_by"
     }
   }
 }

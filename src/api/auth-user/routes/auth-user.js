@@ -32,6 +32,14 @@ module.exports = {
     },
     {
       method: "PUT",
+      path: "/auth-users/updateSavedRoutes",
+      handler: "auth-user.updateSavedRoutes",
+      config: {
+        policies: ["plugin::users-permissions.isAuthed", "is-user"],
+      },
+    },
+    {
+      method: "PUT",
       path: "/auth-users/edit-profile",
       handler: "auth-user.editProfile",
       config: {
