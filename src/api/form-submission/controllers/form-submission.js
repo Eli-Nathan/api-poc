@@ -11,10 +11,13 @@ module.exports = createCoreController(
   ({ strapi }) => ({
     // create method
     async create(ctx) {
-      if (ctx.params.id && ctx.request.body.data) {
-        ctx.request.body.data = {
-          data: ctx.request.body.data,
-          form: ctx.params.id,
+      const requestBody = JSON.parse(ctx.request.body);
+      if (ctx.params.id && requestBody.data) {
+        ctx.request.body = {
+          data: {
+            data: requestBody.data,
+            form: ctx.params.id,
+          },
         };
         const submission = await super.create(ctx);
         return this.sanitizeOutput(submission, ctx);
