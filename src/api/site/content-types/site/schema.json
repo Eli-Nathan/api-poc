@@ -116,6 +116,18 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::facility.facility"
+    },
+    "added_by": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::auth-user.auth-user",
+      "inversedBy": "sites_added"
+    },
+    "contributors": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::auth-user.auth-user",
+      "inversedBy": "sites_contributed"
     }
   }
 }

@@ -114,6 +114,18 @@
       "relation": "manyToMany",
       "target": "api::user-route.user-route",
       "inversedBy": "saved_by"
+    },
+    "sites_added": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::site.site",
+      "mappedBy": "added_by"
+    },
+    "sites_contributed": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::site.site",
+      "inversedBy": "contributors"
     }
   }
 }

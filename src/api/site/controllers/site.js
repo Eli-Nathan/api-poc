@@ -17,13 +17,37 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
   async findOne(ctx) {
     const site = await super.findOne(ctx);
     if (site) {
-      const siteWithOwners = await strapi.db.query("api::site.site").findOne({
+      const siteWithUsers = await strapi.db.query("api::site.site").findOne({
         where: { id: ctx.params.id },
         populate: {
           owners: true,
+          added_by: true,
+          contributors: true,
         },
       });
-      const siteOwners = siteWithOwners?.owners;
+      const siteOwners = siteWithUsers?.owners;
+      const siteAddedBy = siteWithUsers?.added_by;
+      const siteContributors = siteWithUsers?.contributors;
+      const parsedSiteContributors = siteWithUsers.contributors.map(
+        (contributor) => ({
+          id: contributor.id,
+          name: contributor.name,
+          businessName: contributor.businessName,
+          score: contributor.score,
+          level: contributor.level,
+          avatar: contributor.profile_pic?.url || contributor.avatar,
+        })
+      );
+      const parsedSiteAddedBy = siteAddedBy
+        ? {
+            id: siteAddedBy.id,
+            name: siteAddedBy.name,
+            businessName: siteAddedBy.businessName,
+            score: siteAddedBy.score,
+            level: siteAddedBy.level,
+            avatar: siteAddedBy.profile_pic?.url || siteAddedBy.avatar,
+          }
+        : null;
       const siteHasOwners = siteOwners.length > 0;
       const comments = site?.data?.attributes?.comments;
       const sanitizedComments = sanitizeApiResponse(comments);
@@ -44,6 +68,7 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
               return {
                 ...comment,
                 owner: {
+                  id: commentEntity.owner.id,
                   name:
                     commentEntity.owner.businessName ||
                     commentEntity.owner.name,
@@ -65,6 +90,8 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
             ...output.data.attributes,
             comments: enrichedComments,
             isOwned: siteHasOwners,
+            addedBy: parsedSiteAddedBy,
+            contributors: parsedSiteContributors,
           },
         },
       };

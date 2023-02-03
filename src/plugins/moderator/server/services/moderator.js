@@ -122,7 +122,10 @@ module.exports = ({ strapi }) => ({
       });
     const { owner, status, id: _id, ...safeAddition } = addition;
     const approved = await strapi.db.query(`api::site.site`).create({
-      data: safeAddition,
+      data: {
+        ...safeAddition,
+        added_by: addition.owner.id,
+      },
     });
     if (addition.owner) {
       const currentUser = await strapi.db
