@@ -4,7 +4,6 @@ module.exports = [
     path: "/addition-requests",
     handler: "moderator.findAdditions",
     config: {
-      auth: false,
       policies: [],
     },
   },
@@ -13,7 +12,6 @@ module.exports = [
     path: "/edit-requests",
     handler: "moderator.findEdits",
     config: {
-      auth: false,
       policies: [],
     },
   },
@@ -22,7 +20,6 @@ module.exports = [
     path: "/",
     handler: "moderator.findAll",
     config: {
-      auth: false,
       policies: [],
     },
   },
@@ -31,7 +28,6 @@ module.exports = [
     path: "/update/:collection/:id",
     handler: "moderator.reject",
     config: {
-      auth: false,
       policies: [],
     },
   },
@@ -40,7 +36,6 @@ module.exports = [
     path: "/approve-addition-request/:id",
     handler: "moderator.approveAddition",
     config: {
-      auth: false,
       policies: [],
     },
   },
@@ -49,7 +44,6 @@ module.exports = [
     path: "/approve-comment/:id",
     handler: "moderator.approveComment",
     config: {
-      auth: false,
       policies: [],
     },
   },
@@ -58,7 +52,6 @@ module.exports = [
     path: "/approve-edit-request/:id",
     handler: "moderator.approveEdit",
     config: {
-      auth: false,
       policies: [],
     },
   },

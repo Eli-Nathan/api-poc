@@ -17,6 +17,10 @@ module.exports = ({ env }) => {
       enabled: true,
       resolve: "./src/plugins/moderator",
     },
+    "verify-user-email": {
+      enabled: true,
+      resolve: "./src/plugins/verify-user-email", // path to plugin folder
+    },
     "content-export-import": {
       enabled: true,
       resolve: "./src/plugins/content-export-import", // path to plugin folder
