@@ -43,9 +43,7 @@ module.exports = createCoreController(
       if (!ctx.query.filters) {
         ctx.query.filters = {};
       }
-      ctx.query.filters.owner = { $not: ctx.state.user.id };
       ctx.query.filters.public = true;
-
       const routes = await super.find(ctx);
       return this.sanitizeOutput(routes, ctx);
     },
@@ -58,7 +56,6 @@ module.exports = createCoreController(
       if (!ctx.query.filters) {
         ctx.query.filters = {};
       }
-      ctx.query.filters.owner = { $not: ctx.state.user.id };
       ctx.query.filters.public = true;
       const routes = await super.findOne(ctx);
       return this.sanitizeOutput(routes, ctx);
