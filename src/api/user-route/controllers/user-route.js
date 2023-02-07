@@ -36,7 +36,6 @@ module.exports = createCoreController(
       return this.sanitizeOutput(route, ctx);
     },
 
-    // findPublic method
     async findPublic(ctx) {
       if (!ctx.query) {
         ctx.query = {};
@@ -45,6 +44,7 @@ module.exports = createCoreController(
         ctx.query.filters = {};
       }
       ctx.query.filters.owner = { $not: ctx.state.user.id };
+      ctx.query.filters.public = true;
 
       const routes = await super.find(ctx);
       return this.sanitizeOutput(routes, ctx);
@@ -59,6 +59,7 @@ module.exports = createCoreController(
         ctx.query.filters = {};
       }
       ctx.query.filters.owner = { $not: ctx.state.user.id };
+      ctx.query.filters.public = true;
       const routes = await super.findOne(ctx);
       return this.sanitizeOutput(routes, ctx);
     },
