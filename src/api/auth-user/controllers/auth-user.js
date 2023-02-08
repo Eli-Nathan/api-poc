@@ -92,7 +92,16 @@ module.exports = createCoreController(
         user_id,
         ...safeUser
       } = user;
-      return this.sanitizeOutput(safeUser, ctx);
+      const response = {
+        data: {
+          id: safeUser.id,
+          attributes: {
+            ...safeUser,
+          },
+        },
+        meta: {},
+      };
+      return this.sanitizeOutput(response, ctx);
     },
 
     async editProfile(ctx) {
