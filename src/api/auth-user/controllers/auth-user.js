@@ -9,23 +9,31 @@ const utils = require("@strapi/utils");
 
 const { parseMultipartData } = utils;
 
-const populateList = [
+const dangerousList = [
   "addition_requests",
   "edit_requests",
   "saved_public_routes",
   "edit_requests.site",
   "edit_requests.site.type",
+  "role",
+];
+
+const safePopulateList = [
   "user_routes",
   "favourites",
   "favourites.type",
   "profile_pic",
   "comments",
   "comments.site",
-  "role",
   "sites",
   "sites.type",
   "sites.images",
+  "sites_added",
+  "sites_added.type",
+  "sites_added.images",
 ];
+
+const populateList = [...dangerousList, ...safePopulateList];
 
 const enrichCtx = (ctx) => {
   if (!ctx.query) {
@@ -44,6 +52,47 @@ module.exports = createCoreController(
       const enrichedCtx = enrichCtx(ctx);
       const user = await super.findOne(enrichedCtx);
       return this.sanitizeOutput(user, ctx);
+    },
+
+    async getProfile(ctx) {
+      const user = await strapi.db.query(`api::auth-user.auth-user`).findOne({
+        where: { id: ctx.params.id },
+        populate: {
+          profile_pic: true,
+          sites: {
+            populate: {
+              type: true,
+              images: true,
+            },
+          },
+          sites_added: {
+            populate: {
+              type: true,
+              images: true,
+            },
+          },
+          user_routes: {
+            populate: {
+              filters: {
+                public: true,
+              },
+              sites: {
+                site: true,
+              },
+            },
+          },
+        },
+      });
+      const {
+        maxSites,
+        createdAt,
+        updatedAt,
+        allowMarketing,
+        isVerified,
+        user_id,
+        ...safeUser
+      } = user;
+      return this.sanitizeOutput(safeUser, ctx);
     },
 
     async editProfile(ctx) {

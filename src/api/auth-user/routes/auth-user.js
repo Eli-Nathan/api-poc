@@ -15,6 +15,14 @@ module.exports = {
       },
     },
     {
+      method: "GET",
+      path: "/auth-users/profile/:id",
+      handler: "auth-user.getProfile",
+      config: {
+        policies: ["plugin::users-permissions.isAuthed"],
+      },
+    },
+    {
       method: "POST",
       path: "/auth-users",
       handler: "auth-user.create",
