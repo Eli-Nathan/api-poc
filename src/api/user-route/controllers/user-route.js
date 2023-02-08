@@ -43,6 +43,15 @@ module.exports = createCoreController(
       if (!ctx.query.filters) {
         ctx.query.filters = {};
       }
+      if (!ctx.query.populate) {
+        ctx.query.populate = [];
+      }
+      ctx.query.populate = [
+        ...ctx.query.populate,
+        "image",
+        "owner",
+        "owner.profile_pic",
+      ];
       ctx.query.filters.public = true;
       const routes = await super.find(ctx);
       return this.sanitizeOutput(routes, ctx);
