@@ -55,34 +55,24 @@ module.exports = createCoreController(
     },
 
     async getProfile(ctx) {
-      const user = await strapi.db.query(`api::auth-user.auth-user`).findOne({
-        where: { id: ctx.params.id },
-        populate: {
-          profile_pic: true,
-          sites: {
-            populate: {
-              type: true,
-              images: true,
+      const user = await strapi.entityService.findOne(
+        `api::auth-user.auth-user`,
+        ctx.params.id,
+        {
+          populate: {
+            profile_pic: true,
+            sites: {
+              fields: "id",
+            },
+            sites_added: {
+              fields: "id",
+            },
+            user_routes: {
+              fields: "id",
             },
           },
-          sites_added: {
-            populate: {
-              type: true,
-              images: true,
-            },
-          },
-          user_routes: {
-            populate: {
-              filters: {
-                public: true,
-              },
-              sites: {
-                site: true,
-              },
-            },
-          },
-        },
-      });
+        }
+      );
       const {
         maxSites,
         createdAt,
@@ -92,11 +82,17 @@ module.exports = createCoreController(
         user_id,
         ...safeUser
       } = user;
+      const safeUserRelations = {
+        sites: safeUser.sites.map((site) => site.id),
+        sites_added: safeUser.sites_added.map((site) => site.id),
+        user_routes: safeUser.user_routes.map((site) => site.id),
+      };
       const response = {
         data: {
           id: safeUser.id,
           attributes: {
             ...safeUser,
+            ...safeUserRelations,
           },
         },
         meta: {},
