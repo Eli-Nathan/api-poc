@@ -68,7 +68,7 @@ module.exports = createCoreController(
               fields: "id",
             },
             user_routes: {
-              fields: "id",
+              fields: ["id", "public"],
             },
           },
         }
@@ -85,7 +85,15 @@ module.exports = createCoreController(
       const safeUserRelations = {
         sites: safeUser.sites.map((site) => site.id),
         sites_added: safeUser.sites_added.map((site) => site.id),
-        user_routes: safeUser.user_routes.map((site) => site.id),
+        user_routes: safeUser.user_routes
+          .map((route) => {
+            const isOwner = Number(ctx.state.user.id) === Number(ctx.params.id);
+            if (!isOwner && !route.public) {
+              return;
+            }
+            return route.id;
+          })
+          .filter(Boolean),
       };
       const response = {
         data: {
