@@ -26,6 +26,15 @@ module.exports = {
     },
     {
       method: "GET",
+      path: "/user-routes/user/:id",
+      handler: "user-route.findRoutesByUserId",
+      middlewares: ["populate-user-routes"],
+      config: {
+        policies: ["plugin::users-permissions.isAuthed"],
+      },
+    },
+    {
+      method: "GET",
       path: "/user-routes/:id",
       handler: "user-route.findOne",
       middlewares: ["populate-user-routes"],

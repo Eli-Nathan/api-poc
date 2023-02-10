@@ -57,6 +57,31 @@ module.exports = createCoreController(
       return this.sanitizeOutput(routes, ctx);
     },
 
+    async findRoutesByUserId(ctx) {
+      if (!ctx.query) {
+        ctx.query = {};
+      }
+      if (!ctx.query.filters) {
+        ctx.query.filters = {};
+      }
+      if (!ctx.query.populate) {
+        ctx.query.populate = [];
+      }
+      ctx.query.populate = [
+        ...ctx.query.populate,
+        "image",
+        "owner",
+        "owner.profile_pic",
+      ];
+      const isOwner = Number(ctx.state.user.id) === Number(ctx.params.id);
+      if (!isOwner) {
+        ctx.query.filters.public = true;
+      }
+      ctx.query.filters.owner = Number(ctx.params.id);
+      const routes = await super.find(ctx);
+      return this.sanitizeOutput(routes, ctx);
+    },
+
     // findOnePublic method
     async findOnePublic(ctx) {
       if (!ctx.query) {
