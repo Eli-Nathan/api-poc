@@ -71,16 +71,17 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
             avatar: siteAddedBy.profile_pic?.url || siteAddedBy.avatar,
           }
         : null;
-      const parsedSiteOwner = siteOwners
-        ? {
-            id: siteOwners[0].id,
-            name: siteOwners[0].name,
-            businessName: siteOwners[0].businessName,
-            score: siteOwners[0].score,
-            level: siteOwners[0].level,
-            avatar: siteOwners[0].profile_pic?.url || siteOwners[0].avatar,
-          }
-        : null;
+      const parsedSiteOwner =
+        siteOwners && siteOwners.length > 0
+          ? {
+              id: siteOwners[0].id,
+              name: siteOwners[0].name,
+              businessName: siteOwners[0].businessName,
+              score: siteOwners[0].score,
+              level: siteOwners[0].level,
+              avatar: siteOwners[0].profile_pic?.url || siteOwners[0].avatar,
+            }
+          : null;
       const siteHasOwners = siteOwners.length > 0;
       const comments = site?.data?.attributes?.comments;
       const sanitizedComments = sanitizeApiResponse(comments);
