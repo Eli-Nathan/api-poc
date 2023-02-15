@@ -1,4 +1,5 @@
 "use strict";
+const qs = require("qs");
 const sanitizeApiResponse = require("../../../nomad/sanitzeApiResponse");
 /**
  *  site controller
@@ -8,9 +9,31 @@ const { createCoreController } = require("@strapi/strapi").factories;
 
 module.exports = createCoreController("api::site.site", ({ strapi }) => ({
   // find method
-  async find(ctx) {
+  async _find(ctx) {
     const sites = await super.find(ctx);
     return this.sanitizeOutput(sites, ctx);
+  },
+
+  // find method
+  async find(ctx) {
+    const sites = await strapi.entityService.findMany("api::site.site", {
+      fields: ["title", "description", "category", "image", "lat", "lng"],
+      filters: qs.parse(ctx.query.filters),
+      sort: { priority: "DESC" },
+      populate: {
+        type: true,
+        images: true,
+        facilities: true,
+      },
+      limit: ctx.query.limit,
+    });
+    const sanitized = await this.sanitizeOutput(sites, ctx);
+    return {
+      data: sanitized.map((site) => ({
+        id: site.id,
+        attributes: site,
+      })),
+    };
   },
 
   // find one method
@@ -46,6 +69,16 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
             score: siteAddedBy.score,
             level: siteAddedBy.level,
             avatar: siteAddedBy.profile_pic?.url || siteAddedBy.avatar,
+          }
+        : null;
+      const parsedSiteOwner = siteOwners
+        ? {
+            id: siteOwners[0].id,
+            name: siteOwners[0].name,
+            businessName: siteOwners[0].businessName,
+            score: siteOwners[0].score,
+            level: siteOwners[0].level,
+            avatar: siteOwners[0].profile_pic?.url || siteOwners[0].avatar,
           }
         : null;
       const siteHasOwners = siteOwners.length > 0;
@@ -85,11 +118,12 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
       return {
         ...output,
         data: {
-          ...output.data,
+          id: output.data.id,
           attributes: {
             ...output.data.attributes,
             comments: enrichedComments,
             isOwned: siteHasOwners,
+            owner: parsedSiteOwner,
             addedBy: parsedSiteAddedBy,
             contributors: parsedSiteContributors,
           },
