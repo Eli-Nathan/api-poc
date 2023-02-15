@@ -24,11 +24,14 @@ module.exports = createCoreController(
         const ownersIds = site?.owners?.map((s) => s.id).filter(Boolean);
         const isOwnerEditing = ownersIds?.includes(ctx.state.user.id);
         if (isOwnerEditing) {
+          const { owner, images, ...safeData } = ctx.request.body.data.data;
           const newSite = await strapi.db.query(`api::site.site`).update({
             where: { id: siteId },
             data: {
-              ...ctx.request.body.data.data,
-              images: ctx.request.body.data.images,
+              ...safeData,
+              ...(ctx.request.body.data.images.data
+                ? { images: ctx.request.body.data.images }
+                : undefined),
             },
           });
           return {
