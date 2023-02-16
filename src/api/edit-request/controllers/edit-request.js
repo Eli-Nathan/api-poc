@@ -29,7 +29,7 @@ module.exports = createCoreController(
             where: { id: siteId },
             data: {
               ...safeData,
-              ...(ctx.request.body.data.images.data
+              ...(ctx.request.body.data.images?.data
                 ? { images: ctx.request.body.data.images }
                 : undefined),
             },
