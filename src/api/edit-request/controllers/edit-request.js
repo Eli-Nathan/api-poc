@@ -6,6 +6,20 @@
 
 const { createCoreController } = require("@strapi/strapi").factories;
 
+const getEditableFieldsFromSite = (siteData) => {
+  const { title, description, tel, email, facilities, pricerange, url } =
+    siteData;
+  return {
+    title,
+    description,
+    tel,
+    email,
+    facilities,
+    pricerange,
+    url,
+  };
+};
+
 module.exports = createCoreController(
   "api::edit-request.edit-request",
   ({ strapi }) => ({
@@ -24,14 +38,17 @@ module.exports = createCoreController(
         const ownersIds = site?.owners?.map((s) => s.id).filter(Boolean);
         const isOwnerEditing = ownersIds?.includes(ctx.state.user.id);
         if (isOwnerEditing) {
-          const { owner, images, ...safeData } = ctx.request.body.data.data;
+          const safeData = getEditableFieldsFromSite(
+            ctx.request.body.data.data
+          );
+          const images = !ctx.request.body.data.images?.data
+            ? {}
+            : { images: ctx.request.body.data.images };
           const newSite = await strapi.db.query(`api::site.site`).update({
             where: { id: siteId },
             data: {
               ...safeData,
-              ...(ctx.request.body.data.images?.data
-                ? { images: ctx.request.body.data.images }
-                : undefined),
+              ...images,
             },
           });
           return {
