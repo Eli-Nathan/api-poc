@@ -25,7 +25,7 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
         images: true,
         facilities: true,
       },
-      limit: ctx.query.limit,
+      limit: ctx.query.limit || ctx.query.pagination?.limit,
     });
     const sanitized = await this.sanitizeOutput(sites, ctx);
     return {
