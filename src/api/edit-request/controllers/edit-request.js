@@ -41,9 +41,9 @@ module.exports = createCoreController(
           const safeData = getEditableFieldsFromSite(
             ctx.request.body.data.data
           );
-          const images = !ctx.request.body.data.images?.data
-            ? {}
-            : { images: ctx.request.body.data.images };
+          const images = Array.isArray(ctx.request.body.data.images)
+            ? { images: ctx.request.body.data.images }
+            : {};
           const newSite = await strapi.db.query(`api::site.site`).update({
             where: { id: siteId },
             data: {
