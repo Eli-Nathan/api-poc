@@ -128,6 +128,11 @@
       "relation": "manyToMany",
       "target": "api::auth-user.auth-user",
       "inversedBy": "sites_contributed"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title",
+      "required": true
     }
   }
 }
