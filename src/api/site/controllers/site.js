@@ -17,7 +17,15 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
   // find method
   async find(ctx) {
     const sites = await strapi.entityService.findMany("api::site.site", {
-      fields: ["title", "description", "category", "image", "lat", "lng"],
+      fields: [
+        "title",
+        "description",
+        "category",
+        "image",
+        "lat",
+        "lng",
+        "slug",
+      ],
       filters: qs.parse(ctx.query.filters),
       sort: { priority: "DESC" },
       populate: {
