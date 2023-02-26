@@ -13,9 +13,10 @@ module.exports = (response) => {
     }, []);
     return sanitized;
   }
+  const { attributes, ...restProps } = response.data;
   const sanitized = {
-    id: response.data.id,
     ...response.data.attributes,
+    ...restProps,
   };
   return sanitized;
 };

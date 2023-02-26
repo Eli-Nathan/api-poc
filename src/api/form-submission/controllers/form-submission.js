@@ -1,4 +1,6 @@
 "use strict";
+const axios = require("axios");
+const { sendEntryToSlack } = require("../../../nomad/slack");
 
 /**
  *  form-submission controller
@@ -20,7 +22,9 @@ module.exports = createCoreController(
           },
         };
         const submission = await super.create(ctx);
-        return this.sanitizeOutput(submission, ctx);
+        const sanitized = await this.sanitizeOutput(submission, ctx);
+        await sendEntryToSlack(sanitized, "form", ctx);
+        return sanitized;
       }
       ctx.status = 400;
       return {
