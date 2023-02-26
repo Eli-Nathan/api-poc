@@ -125,7 +125,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::site.site",
-      "inversedBy": "contributors"
+      "mappedBy": "contributors"
     }
   }
 }

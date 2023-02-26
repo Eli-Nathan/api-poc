@@ -62,7 +62,7 @@ const sendEntryToSlack = async (entry, type, ctx) => {
     const message = await messageHandler(ctx, sanitizedEntry);
     try {
       const axiosReq = await axios.post(
-        "https://hooks.slack.com/services/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",
+        process.env.SLACK_FORM_WEBHOOK_URL,
         message,
         {
           headers: {
