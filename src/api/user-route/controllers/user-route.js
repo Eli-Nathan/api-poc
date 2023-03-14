@@ -1,18 +1,25 @@
 "use strict";
+const { createCoreController } = require("@strapi/strapi").factories;
+const utils = require("@strapi/utils");
+
 const logger = require("../../../nomad/logger");
+const generatePolyline = require("../../../nomad/getPolyline");
+
+const { parseMultipartData } = utils;
 
 const checkIfPlacesMatch = (api, req) => {
   if (api.length !== req.length) {
     return false;
   }
   const eachMatch = api.map((place, i) => {
-    if (place.site) {
+    if (place.site && req[i].site) {
       return place.site.id === req[i].site;
-    } else if (place.custom) {
+    } else if (place.custom && req[i].custom) {
       const matchingLat = place.custom.lat === req[i].custom.lat;
       const matchingLng = place.custom.lng === req[i].custom.lng;
       return matchingLat && matchingLng;
     }
+    return false;
   });
   return eachMatch.every(Boolean);
 };
@@ -20,12 +27,6 @@ const checkIfPlacesMatch = (api, req) => {
 /**
  *  user-route controller
  */
-
-const { createCoreController } = require("@strapi/strapi").factories;
-const utils = require("@strapi/utils");
-const generatePolyline = require("../../../nomad/getPolyline");
-
-const { parseMultipartData } = utils;
 
 module.exports = createCoreController(
   "api::user-route.user-route",
@@ -182,6 +183,9 @@ module.exports = createCoreController(
           },
         }
       );
+
+      console.log("existing", existingRoute.sites);
+      console.log("changes", ctx.request.body.data.sites);
 
       const sitesHaveChanged = !checkIfPlacesMatch(
         existingRoute.sites,

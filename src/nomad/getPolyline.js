@@ -1,6 +1,8 @@
 const { default: axios } = require("axios");
 const logger = require("./logger");
 
+const GOOGLE_MAPS_API_KEY = process.env.GOOGLE_MAPS_API_KEY;
+
 const WAYPOINT_LIMIT = 10;
 function decode(t) {
   let points = [];
@@ -43,7 +45,7 @@ async function fetchDirections(props) {
     origin: initialOrigin,
     destination: initialDestination,
     waypoints: initialWaypoints = [],
-    apikey = "AIzaSyDmSQL-Km5Vrrb_rfnEj9NEF2vTA133Ij8",
+    apikey = GOOGLE_MAPS_API_KEY,
     onStart,
     onError,
     mode = "DRIVING",
