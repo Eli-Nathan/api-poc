@@ -1,4 +1,21 @@
 "use strict";
+const logger = require("../../../nomad/logger");
+
+const checkIfPlacesMatch = (api, req) => {
+  if (api.length !== req.length) {
+    return false;
+  }
+  const eachMatch = api.map((place, i) => {
+    if (place.site) {
+      return place.site.id === req[i].site;
+    } else if (place.custom) {
+      const matchingLat = place.custom.lat === req[i].custom.lat;
+      const matchingLng = place.custom.lng === req[i].custom.lng;
+      return matchingLat && matchingLng;
+    }
+  });
+  return eachMatch.every(Boolean);
+};
 
 /**
  *  user-route controller
@@ -6,6 +23,7 @@
 
 const { createCoreController } = require("@strapi/strapi").factories;
 const utils = require("@strapi/utils");
+const generatePolyline = require("../../../nomad/getPolyline");
 
 const { parseMultipartData } = utils;
 
@@ -93,6 +111,125 @@ module.exports = createCoreController(
       ctx.query.filters.public = true;
       const routes = await super.findOne(ctx);
       return this.sanitizeOutput(routes, ctx);
+    },
+
+    // create method
+    async create(ctx) {
+      if (!ctx.request?.body?.data) {
+        return {
+          status: 400,
+          message: "Bad request",
+        };
+      }
+
+      const sitesAsWaypoints = (ctx.request.body.data.sites || []).map(
+        (site) => {
+          if (site.custom) {
+            return {
+              latitude: site.custom.lat,
+              longitude: site.custom.lng,
+            };
+          }
+          return {
+            latitude: site.lat,
+            longitude: site.lng,
+          };
+        }
+      );
+
+      const waypointsWithoutFirstAndLast = [...sitesAsWaypoints].filter(
+        (_f, i) => i !== 0 && i !== sitesAsWaypoints.length - 1
+      );
+      const waypoints =
+        waypointsWithoutFirstAndLast.length > 0
+          ? waypointsWithoutFirstAndLast
+          : undefined;
+      const origin = sitesAsWaypoints?.[0];
+      const destination = sitesAsWaypoints?.[sitesAsWaypoints.length - 1];
+
+      const polyline = await generatePolyline({
+        waypoints,
+        origin,
+        destination,
+      });
+      if (polyline) {
+        ctx.request.body.data.polyline = polyline;
+      }
+      const route = await super.create(ctx);
+      const sanitized = await this.sanitizeOutput(route, ctx);
+      if (!polyline) {
+        logger.warn(
+          "No polyline generated when creating route:",
+          sanitized?.data?.id
+        );
+      }
+      return sanitized;
+    },
+
+    // update method
+    async update(ctx) {
+      const existingRoute = await strapi.entityService.findOne(
+        `api::user-route.user-route`,
+        ctx.params.id,
+        {
+          fields: ["polyline"],
+          populate: {
+            sites: {
+              populate: {
+                site: { fields: ["id"] },
+              },
+            },
+          },
+        }
+      );
+
+      const sitesHaveChanged = !checkIfPlacesMatch(
+        existingRoute.sites,
+        ctx.request.body.data.sites
+      );
+
+      const sitesAsWaypoints = (ctx.request.body.data.sites || []).map(
+        (site) => {
+          if (site.custom) {
+            return {
+              latitude: site.custom.lat,
+              longitude: site.custom.lng,
+            };
+          }
+          return {
+            latitude: site.lat,
+            longitude: site.lng,
+          };
+        }
+      );
+
+      if (sitesHaveChanged) {
+        const waypointsWithoutFirstAndLast = [...sitesAsWaypoints].filter(
+          (_f, i) => i !== 0 && i !== sitesAsWaypoints.length - 1
+        );
+        const waypoints =
+          waypointsWithoutFirstAndLast.length > 0
+            ? waypointsWithoutFirstAndLast
+            : undefined;
+        const origin = sitesAsWaypoints?.[0];
+        const destination = sitesAsWaypoints?.[sitesAsWaypoints.length - 1];
+
+        const polyline = await generatePolyline({
+          waypoints,
+          origin,
+          destination,
+        });
+        if (polyline) {
+          ctx.request.body.data.polyline = polyline;
+        } else {
+          logger.warn(
+            `No polyline generated when updating route: ${ctx.params.id}`
+          );
+        }
+      }
+
+      const route = await super.update(ctx);
+      return await this.sanitizeOutput(route, ctx);
     },
   })
 );

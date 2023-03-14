@@ -48,6 +48,9 @@
       "relation": "manyToMany",
       "target": "api::auth-user.auth-user",
       "inversedBy": "saved_public_routes"
+    },
+    "polyline": {
+      "type": "json"
     }
   }
 }
