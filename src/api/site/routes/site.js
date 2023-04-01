@@ -18,5 +18,11 @@ module.exports = {
       handler: "site.findOne",
       middlewares: ["populate-site"],
     },
+    {
+      method: "GET",
+      path: "/sites/uid/:uid",
+      handler: "site.findOneByUID",
+      middlewares: ["populate-site"],
+    },
   ],
 };
