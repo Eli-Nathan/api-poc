@@ -21,5 +21,14 @@ module.exports = {
         policies: ["plugin::users-permissions.isAuthed", "global::set-owner"],
       },
     },
+    {
+      method: "DELETE",
+      path: "/comments/:id",
+      handler: "comment.delete",
+      middlewares: ["populate-comments"],
+      config: {
+        policies: ["plugin::users-permissions.isAuthed", "global::is-owner"],
+      },
+    },
   ],
 };

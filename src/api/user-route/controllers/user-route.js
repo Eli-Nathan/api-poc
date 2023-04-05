@@ -184,9 +184,6 @@ module.exports = createCoreController(
         }
       );
 
-      console.log("existing", existingRoute.sites);
-      console.log("changes", ctx.request.body.data.sites);
-
       const sitesHaveChanged = !checkIfPlacesMatch(
         existingRoute.sites,
         ctx.request.body.data.sites
