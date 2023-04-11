@@ -51,9 +51,15 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
       const siteWithUsers = await strapi.db.query("api::site.site").findOne({
         where: { id: ctx.params.id },
         populate: {
-          owners: true,
-          added_by: true,
-          contributors: true,
+          owners: {
+            populate: { profile_pic: true },
+          },
+          added_by: {
+            populate: { profile_pic: true },
+          },
+          contributors: {
+            populate: { profile_pic: true },
+          },
         },
       });
       return this.parseSingleSite(ctx, site, siteWithUsers);
@@ -66,7 +72,9 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
       populate: {
         type: true,
         comments: true,
-        owners: true,
+        owners: {
+          populate: { profile_pic: true },
+        },
         facilities: true,
       },
     });
@@ -74,9 +82,15 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
       const siteWithUsers = await strapi.db.query("api::site.site").findOne({
         where: { slug: ctx.params.uid },
         populate: {
-          owners: true,
-          added_by: true,
-          contributors: true,
+          owners: {
+            populate: { profile_pic: true },
+          },
+          added_by: {
+            populate: { profile_pic: true },
+          },
+          contributors: {
+            populate: { profile_pic: true },
+          },
         },
       });
       const siteToParse = {
