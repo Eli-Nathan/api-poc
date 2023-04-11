@@ -19,7 +19,6 @@ const dangerousList = [
 ];
 
 const safePopulateList = [
-  "user_routes",
   "favourites",
   "favourites.type",
   "profile_pic",
