@@ -32,15 +32,17 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
         type: true,
         images: true,
         facilities: true,
+        owners: true,
       },
       limit: ctx.query.limit || ctx.query.pagination?.limit,
     });
-    const sanitized = await this.sanitizeOutput(sites, ctx);
     return {
-      data: sanitized.map((site) => ({
-        id: site.id,
-        attributes: site,
-      })),
+      data: sites.map((site) => {
+        return {
+          id: site.id,
+          attributes: { ...site, isOwned: !!site.owners?.length },
+        };
+      }),
     };
   },
 
