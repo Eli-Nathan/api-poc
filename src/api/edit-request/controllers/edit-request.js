@@ -1,5 +1,7 @@
 "use strict";
 
+const { sendEntryToSlack } = require("../../../nomad/slack");
+
 /**
  *  edit-request controller
  */
@@ -62,6 +64,7 @@ module.exports = createCoreController(
         }
       }
       const edit = await super.create(ctx);
+      await sendEntryToSlack(edit, "editRequest", ctx);
       return this.sanitizeOutput(edit, ctx);
     },
   })
