@@ -118,6 +118,7 @@ module.exports = ({ strapi }) => ({
         populate: {
           owner: true,
           type: true,
+          facilities: true,
         },
       });
     const { owner, status, id: _id, ...safeAddition } = addition;
