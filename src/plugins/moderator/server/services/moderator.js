@@ -119,6 +119,7 @@ module.exports = ({ strapi }) => ({
           owner: true,
           type: true,
           facilities: true,
+          sub_types: true,
         },
       });
     const { owner, status, id: _id, ...safeAddition } = addition;
@@ -192,6 +193,7 @@ module.exports = ({ strapi }) => ({
           site: true,
           type: true,
           facilities: true,
+          sub_types: true,
         },
       });
     const approved = await strapi.db.query(`api::site.site`).update({

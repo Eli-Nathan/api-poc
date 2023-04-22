@@ -13,9 +13,13 @@ const populateList = [
   "items",
   "filters",
   "filters.filter",
-  "filters.filter.filter",
+  "filters.filter",
+  "filters.filter.remote_icon",
   "filters.filter.filter.siteType",
   "filters.filter.filter.facility",
+  "filters.filter.filter.facility.remote_icon",
+  "filters.filter.filter.siteType.remote_icon",
+  "filters.filter.filter.siteType.remote_marker",
 ];
 
 const sortBy = ["priority"];

@@ -133,6 +133,11 @@
       "type": "uid",
       "targetField": "title",
       "required": true
+    },
+    "sub_types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::site-type.site-type"
     }
   }
 }

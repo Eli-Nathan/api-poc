@@ -24,6 +24,14 @@
     },
     "icon": {
       "type": "string"
+    },
+    "remote_icon": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

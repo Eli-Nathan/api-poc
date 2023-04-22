@@ -29,9 +29,15 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
       filters: qs.parse(ctx.query.filters),
       sort: { priority: "DESC" },
       populate: {
-        type: true,
+        type: {
+          populate: {
+            remote_icon: true,
+            remote_marker: true,
+          },
+        },
         images: true,
         facilities: true,
+        sub_types: true,
         owners: true,
       },
       limit: ctx.query.limit || ctx.query.pagination?.limit,
@@ -78,6 +84,7 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
           populate: { profile_pic: true },
         },
         facilities: true,
+        sub_types: true,
       },
     });
     if (site) {

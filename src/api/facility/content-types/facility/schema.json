@@ -4,7 +4,8 @@
   "info": {
     "singularName": "facility",
     "pluralName": "facilities",
-    "displayName": "Facilities"
+    "displayName": "Facilities",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -23,7 +24,14 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::site-type.site-type",
-      "inversedBy": "facilities"
+      "mappedBy": "facilities"
+    },
+    "remote_icon": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
     }
   }
 }

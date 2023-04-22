@@ -1,10 +1,14 @@
 const populateList = [
   "type",
+  "type.remote_icon",
+  "type.remote_marker",
+  "type",
   "comments",
   "comments.owner",
   "comments.site",
   "owners",
   "facilities",
+  "sub_types",
 ];
 
 const enrichCtx = (ctx) => {

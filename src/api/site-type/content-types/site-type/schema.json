@@ -31,6 +31,22 @@
       "relation": "manyToMany",
       "target": "api::facility.facility",
       "inversedBy": "relevance"
+    },
+    "remote_icon": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "remote_marker": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
     }
   }
 }

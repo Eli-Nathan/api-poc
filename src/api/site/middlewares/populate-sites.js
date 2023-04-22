@@ -1,4 +1,10 @@
-const populateList = ["type", "facilities"];
+const populateList = [
+  "type",
+  "type.remote_icon",
+  "type.remote_marker",
+  "facilities",
+  "sub_types",
+];
 
 const enrichCtx = (ctx) => {
   if (!ctx.query) {
