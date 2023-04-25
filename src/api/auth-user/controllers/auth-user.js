@@ -53,6 +53,19 @@ module.exports = createCoreController(
       return this.sanitizeOutput(user, ctx);
     },
 
+    async getSubscription(ctx) {
+      const user = await super.findOne(ctx);
+      const { email } = user;
+      const sub = await strapi
+        .plugin("strapi-stripe")
+        .service("stripeService")
+        .searchSubscriptionStatus(ctx.state.user.email);
+      if (!sub || !sub?.data || !sub?.data?.[0]) {
+        return this.sanitizeOutput(undefined, ctx);
+      }
+      const subData = sub.data[0];
+      return this.sanitizeOutput(subData, ctx);
+    },
     async getProfile(ctx) {
       const user = await strapi.entityService.findOne(
         `api::auth-user.auth-user`,

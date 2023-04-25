@@ -23,6 +23,14 @@ module.exports = {
       },
     },
     {
+      method: "GET",
+      path: "/auth-users/subscription",
+      handler: "auth-user.getSubscription",
+      config: {
+        policies: ["plugin::users-permissions.isAuthed", "is-user"],
+      },
+    },
+    {
       method: "POST",
       path: "/auth-users",
       handler: "auth-user.create",
