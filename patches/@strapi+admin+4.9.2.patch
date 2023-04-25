@@ -1,3 +1,16 @@
+diff --git a/node_modules/@strapi/admin/admin/src/pages/AuthPage/utils/forms.js b/node_modules/@strapi/admin/admin/src/pages/AuthPage/utils/forms.js
+index ec4239e..4c6b665 100644
+--- a/node_modules/@strapi/admin/admin/src/pages/AuthPage/utils/forms.js
++++ b/node_modules/@strapi/admin/admin/src/pages/AuthPage/utils/forms.js
+@@ -49,7 +49,7 @@ const forms = {
+   register: {
+     Component: Register,
+     endPoint: 'register',
+-    fieldsToDisable: ['email'],
++    fieldsToDisable: [],
+     fieldsToOmit: ['userInfo.confirmPassword', 'userInfo.news', 'userInfo.email'],
+     schema: yup.object().shape({
+       firstname: yup.string().trim().required(translatedErrors.required),
 diff --git a/node_modules/@strapi/admin/admin/src/pages/SettingsPage/pages/Users/ListPage/utils/tableHeaders.js b/node_modules/@strapi/admin/admin/src/pages/SettingsPage/pages/Users/ListPage/utils/tableHeaders.js
 index 203d187..450ffd4 100644
 --- a/node_modules/@strapi/admin/admin/src/pages/SettingsPage/pages/Users/ListPage/utils/tableHeaders.js
