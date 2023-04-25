@@ -7,7 +7,6 @@ import { Button } from "@strapi/design-system/Button";
 import Plus from "@strapi/icons/Plus";
 import Eye from "@strapi/icons/Eye";
 import Check from "@strapi/icons/Check";
-import Close from "@strapi/icons/Close";
 import { EmptyStateLayout } from "@strapi/design-system/EmptyStateLayout";
 import { Flex } from "@strapi/design-system/Flex";
 import { Table, Thead, Tbody, Tr, Td, Th } from "@strapi/design-system/Table";
