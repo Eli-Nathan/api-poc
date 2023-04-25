@@ -1,0 +1,37 @@
+diff --git a/node_modules/@strapi/admin/admin/src/pages/SettingsPage/pages/Users/ListPage/utils/tableHeaders.js b/node_modules/@strapi/admin/admin/src/pages/SettingsPage/pages/Users/ListPage/utils/tableHeaders.js
+index 203d187..450ffd4 100644
+--- a/node_modules/@strapi/admin/admin/src/pages/SettingsPage/pages/Users/ListPage/utils/tableHeaders.js
++++ b/node_modules/@strapi/admin/admin/src/pages/SettingsPage/pages/Users/ListPage/utils/tableHeaders.js
+@@ -43,20 +43,18 @@ const tableHeaders = [
+       },
+       sortable: false,
+     },
+-    cellFormatter({ roles }, { formatMessage }) {
+-      return (
+-        <Typography textColor="neutral800">
+-          {roles
+-            .map((role) =>
+-              formatMessage({
+-                id: `Settings.permissions.users.${role.code}`,
+-                defaultMessage: role.name,
+-              })
+-            )
+-            .join(',\n')}
+-        </Typography>
+-      );
+-    },
++cellFormatter({ roles }, { formatMessage }) {
++  return (
++    <Typography textColor="neutral800">
++      {roles?.map((role) =>
++          formatMessage({
++            id: `Settings.permissions.users.${role.code}`,
++            defaultMessage: role.name,
++          })
++        )?.join(',\n')}
++    </Typography>
++  );
++},
+   },
+   {
+     key: 'username',
