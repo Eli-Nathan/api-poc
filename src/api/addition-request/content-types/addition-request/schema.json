@@ -75,6 +75,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::facility.facility"
+    },
+    "sub_types": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::site-type.site-type"
     }
   }
 }
