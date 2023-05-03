@@ -1,0 +1,30 @@
+diff --git a/node_modules/@strapi/plugin-upload/admin/src/components/AssetDialog/BrowseStep/index.js b/node_modules/@strapi/plugin-upload/admin/src/components/AssetDialog/BrowseStep/index.js
+index eb0e78a..dda2388 100644
+--- a/node_modules/@strapi/plugin-upload/admin/src/components/AssetDialog/BrowseStep/index.js
++++ b/node_modules/@strapi/plugin-upload/admin/src/components/AssetDialog/BrowseStep/index.js
+@@ -317,8 +317,8 @@ export const BrowseStep = ({
+                                     '{folderCount, plural, =0 {# folder} one {# folder} other {# folders}}, {filesCount, plural, =0 {# asset} one {# asset} other {# assets}}',
+                                 },
+                                 {
+-                                  folderCount: folder.children.count,
+-                                  filesCount: folder.files.count,
++                                  folderCount: folder?.children?.count,
++                                  filesCount: folder?.files?.count,
+                                 }
+                               )}
+                             </TypographyMaxWidth>
+diff --git a/node_modules/@strapi/plugin-upload/admin/src/pages/App/MediaLibrary/index.js b/node_modules/@strapi/plugin-upload/admin/src/pages/App/MediaLibrary/index.js
+index 2abdefa..2ca5814 100644
+--- a/node_modules/@strapi/plugin-upload/admin/src/pages/App/MediaLibrary/index.js
++++ b/node_modules/@strapi/plugin-upload/admin/src/pages/App/MediaLibrary/index.js
+@@ -421,8 +421,8 @@ export const MediaLibrary = () => {
+                                         '{folderCount, plural, =0 {# folder} one {# folder} other {# folders}}, {filesCount, plural, =0 {# asset} one {# asset} other {# assets}}',
+                                     },
+                                     {
+-                                      folderCount: folder.children.count,
+-                                      filesCount: folder.files.count,
++                                      folderCount: folder?.children?.count,
++                                      filesCount: folder?.files?.count,
+                                     }
+                                   )}
+                                 </TypographyMaxWidth>
