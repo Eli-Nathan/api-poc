@@ -204,6 +204,7 @@ module.exports = createCoreController(
         waypoints,
         origin,
         destination,
+        mode: ctx.request?.body?.data?.mode,
       });
       if (polyline) {
         ctx.request.body.data.polyline = polyline;
@@ -256,7 +257,10 @@ module.exports = createCoreController(
         }
       );
 
-      if (sitesHaveChanged) {
+      if (
+        sitesHaveChanged ||
+        existingRoute.mode !== ctx.request?.body?.data?.mode
+      ) {
         const waypointsWithoutFirstAndLast = [...sitesAsWaypoints].filter(
           (_f, i) => i !== 0 && i !== sitesAsWaypoints.length - 1
         );
@@ -271,6 +275,7 @@ module.exports = createCoreController(
           waypoints,
           origin,
           destination,
+          mode: ctx.request?.body?.data?.mode,
         });
         if (polyline) {
           ctx.request.body.data.polyline = polyline;

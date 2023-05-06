@@ -52,6 +52,16 @@
     "polyline": {
       "type": "json",
       "private": true
+    },
+    "mode": {
+      "type": "enumeration",
+      "enum": [
+        "DRIVING",
+        "WALKING",
+        "CYCLING"
+      ],
+      "default": "DRIVING",
+      "required": false
     }
   }
 }
