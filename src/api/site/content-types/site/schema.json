@@ -138,6 +138,12 @@
       "relation": "manyToMany",
       "target": "api::tag.tag",
       "inversedBy": "sites"
+    },
+    "nomad_routes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::nomad-route.nomad-route",
+      "mappedBy": "pois"
     }
   }
 }

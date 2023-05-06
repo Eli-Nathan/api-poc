@@ -56,6 +56,18 @@
         "WALKING",
         "CYCLING"
       ]
+    },
+    "stay": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::site.site",
+      "inversedBy": "nomad_routes"
+    },
+    "pois": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::site.site",
+      "inversedBy": "nomad_routes"
     }
   }
 }

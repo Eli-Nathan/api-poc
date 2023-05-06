@@ -24,9 +24,33 @@ module.exports = createCoreController(
           populate: {
             image: true,
             tags: true,
+            pois: {
+              populate: {
+                type: {
+                  populate: {
+                    remote_icon: true,
+                    remote_marker: true,
+                  },
+                },
+              },
+              images: true,
+            },
+            stay: {
+              populate: {
+                type: {
+                  populate: {
+                    remote_icon: true,
+                    remote_marker: true,
+                  },
+                },
+              },
+              images: true,
+            },
           },
         }
       );
+
+      console.log("route", route);
 
       if (!route) {
         ctx.status = 404;
