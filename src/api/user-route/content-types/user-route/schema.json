@@ -62,6 +62,12 @@
       ],
       "default": "DRIVING",
       "required": false
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "user_routes"
     }
   }
 }

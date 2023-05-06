@@ -29,6 +29,7 @@ module.exports = [
       },
     },
   },
+  "api::nomad-route.populate-nomad-routes",
   "api::user-route.populate-user-routes",
   "api::addition-request.populate-additions",
   "api::edit-request.populate-edits",

@@ -1,9 +1,22 @@
-'use strict';
+"use strict";
 
 /**
  * nomad-route router.
  */
 
-const { createCoreRouter } = require('@strapi/strapi').factories;
-
-module.exports = createCoreRouter('api::nomad-route.nomad-route');
+module.exports = {
+  routes: [
+    {
+      method: "GET",
+      path: "/nomad-routes",
+      handler: "nomad-route.find",
+      middlewares: ["populate-nomad-routes"],
+    },
+    {
+      method: "GET",
+      path: "/nomad-routes/:id",
+      handler: "nomad-route.findOne",
+      middlewares: ["populate-nomad-routes"],
+    },
+  ],
+};

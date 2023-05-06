@@ -4,6 +4,7 @@ const populateList = [
   "type.remote_marker",
   "facilities",
   "sub_types",
+  "tags",
 ];
 
 const enrichCtx = (ctx) => {

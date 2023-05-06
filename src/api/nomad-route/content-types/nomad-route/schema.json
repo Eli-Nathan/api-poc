@@ -37,16 +37,25 @@
       "required": true
     },
     "polyline": {
-      "type": "json"
-    },
-    "site": {
-      "type": "relation",
-      "relation": "manyToOne",
-      "target": "api::site.site",
-      "inversedBy": "nomad_routes"
+      "type": "json",
+      "private": true
     },
     "description": {
       "type": "text"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "nomad_routes"
+    },
+    "mode": {
+      "type": "enumeration",
+      "enum": [
+        "DRIVING",
+        "WALKING",
+        "CYCLING"
+      ]
     }
   }
 }

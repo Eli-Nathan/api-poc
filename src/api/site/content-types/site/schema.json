@@ -94,12 +94,6 @@
       "relation": "oneToOne",
       "target": "api::site-type.site-type"
     },
-    "nomad_routes": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::nomad-route.nomad-route",
-      "mappedBy": "site"
-    },
     "comments": {
       "type": "relation",
       "relation": "oneToMany",
@@ -138,6 +132,12 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::site-type.site-type"
+    },
+    "tags": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tag.tag",
+      "inversedBy": "sites"
     }
   }
 }

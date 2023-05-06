@@ -9,6 +9,7 @@ const populateList = [
   "owners",
   "facilities",
   "sub_types",
+  "tags",
 ];
 
 const enrichCtx = (ctx) => {
