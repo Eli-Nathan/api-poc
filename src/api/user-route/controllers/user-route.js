@@ -46,13 +46,38 @@ module.exports = createCoreController(
 
     // findOne method
     async findOne(ctx) {
-      const route = await super.findOne(ctx);
+      const route = await strapi.entityService.findOne(
+        `api::user-route.user-route`,
+        ctx.params.id,
+        {
+          filters: {
+            owner: ctx.state.user.id,
+          },
+          populate: {
+            image: true,
+            sites: {
+              populate: {
+                site: {
+                  populate: {
+                    type: true,
+                  },
+                },
+              },
+            },
+            owner: {
+              populate: {
+                profile_pic: true,
+              },
+            },
+          },
+        }
+      );
 
       if (!route) {
         ctx.status = 404;
         return { status: 404, message: "Route not found" };
       }
-      return this.sanitizeOutput(route, ctx);
+      return this.transformResponse(route);
     },
 
     async findPublic(ctx) {
@@ -110,8 +135,33 @@ module.exports = createCoreController(
         ctx.query.filters = {};
       }
       ctx.query.filters.public = true;
-      const routes = await super.findOne(ctx);
-      return this.sanitizeOutput(routes, ctx);
+      const route = await strapi.entityService.findOne(
+        `api::user-route.user-route`,
+        ctx.params.id,
+        {
+          filters: {
+            public: true,
+          },
+          populate: {
+            image: true,
+            sites: {
+              populate: {
+                site: {
+                  populate: {
+                    type: true,
+                  },
+                },
+              },
+            },
+            owner: {
+              populate: {
+                profile_pic: true,
+              },
+            },
+          },
+        }
+      );
+      return this.transformResponse(route);
     },
 
     // create method

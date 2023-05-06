@@ -113,7 +113,7 @@
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::user-route.user-route",
-      "inversedBy": "saved_by"
+      "mappedBy": "saved_by"
     },
     "sites_added": {
       "type": "relation",

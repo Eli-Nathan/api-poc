@@ -50,7 +50,8 @@
       "inversedBy": "saved_public_routes"
     },
     "polyline": {
-      "type": "json"
+      "type": "json",
+      "private": true
     }
   }
 }
