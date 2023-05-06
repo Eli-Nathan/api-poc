@@ -60,6 +60,7 @@ module.exports = createCoreController(
                 site: {
                   populate: {
                     type: true,
+                    images: true,
                   },
                 },
               },
@@ -149,6 +150,7 @@ module.exports = createCoreController(
                 site: {
                   populate: {
                     type: true,
+                    images: true,
                   },
                 },
               },
