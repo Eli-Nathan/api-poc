@@ -50,8 +50,6 @@ module.exports = createCoreController(
         }
       );
 
-      console.log("route", route);
-
       if (!route) {
         ctx.status = 404;
         return { status: 404, message: "Route not found" };
