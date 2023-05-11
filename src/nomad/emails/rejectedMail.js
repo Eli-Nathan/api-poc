@@ -7,11 +7,11 @@ Unfortunately, your ${sanitizedCollectionType} for ${title} was rejected.
 
 This could be for a number of reasons such as inaccurate information, or information we simply couldn't verify.
 	  
-Please reply to this email if you'd like to discuss further. Thanks!      
+Please reply to this email if you'd like to discuss further. Thanks!
 
 -- 
 
-Nomad Team.	
+wildway Team.	
 `,
     html: `
 <h2>Rejected ${sanitizedCollectionType}</h2>
@@ -24,7 +24,7 @@ Nomad Team.
 	
 <p>--</p> 
 	
-<p>Nomad Team.</p>
+<p>wildway Team.</p>
 `,
   };
 };
