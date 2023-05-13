@@ -54,8 +54,9 @@
     },
     "favourites": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::site.site"
+      "relation": "manyToMany",
+      "target": "api::site.site",
+      "inversedBy": "likes"
     },
     "user_routes": {
       "type": "relation",

@@ -144,6 +144,12 @@
       "relation": "manyToMany",
       "target": "api::nomad-route.nomad-route",
       "mappedBy": "pois"
+    },
+    "likes": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::auth-user.auth-user",
+      "mappedBy": "favourites"
     }
   }
 }

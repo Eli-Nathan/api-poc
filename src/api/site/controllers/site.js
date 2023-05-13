@@ -59,6 +59,7 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
       const siteWithUsers = await strapi.db.query("api::site.site").findOne({
         where: { id: ctx.params.id },
         populate: {
+          likes: true,
           owners: {
             populate: { profile_pic: true },
           },
@@ -120,6 +121,7 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
     shouldSanitizeChildren = true
   ) {
     const siteOwners = siteWithUsers?.owners;
+    const siteLikes = siteWithUsers?.likes;
     const siteAddedBy = siteWithUsers?.added_by;
     const siteContributors = siteWithUsers?.contributors;
     const parsedSiteContributors = siteWithUsers.contributors.map(
@@ -132,6 +134,14 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
         avatar: contributor.profile_pic?.url || contributor.avatar,
       })
     );
+    const parsedSiteLikes = siteLikes?.map((likeUser) => ({
+      id: likeUser.id,
+      name: likeUser.name,
+      businessName: likeUser.businessName,
+      score: likeUser.score,
+      level: likeUser.level,
+      avatar: likeUser.profile_pic?.url || likeUser.avatar,
+    }));
     const parsedSiteAddedBy = siteAddedBy
       ? {
           id: siteAddedBy.id,
@@ -199,6 +209,7 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
           owner: parsedSiteOwner,
           addedBy: parsedSiteAddedBy,
           contributors: parsedSiteContributors,
+          likes: parsedSiteLikes,
         },
       },
     };

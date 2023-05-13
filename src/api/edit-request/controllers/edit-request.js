@@ -9,8 +9,16 @@ const { sendEntryToSlack } = require("../../../nomad/slack");
 const { createCoreController } = require("@strapi/strapi").factories;
 
 const getEditableFieldsFromSite = (siteData) => {
-  const { title, description, tel, email, facilities, pricerange, url } =
-    siteData;
+  const {
+    title,
+    description,
+    tel,
+    email,
+    facilities,
+    pricerange,
+    url,
+    sub_types,
+  } = siteData;
   return {
     title,
     description,
@@ -18,6 +26,7 @@ const getEditableFieldsFromSite = (siteData) => {
     email,
     facilities,
     pricerange,
+    sub_types,
     url,
   };
 };

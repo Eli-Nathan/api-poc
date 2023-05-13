@@ -10,6 +10,7 @@ const populateList = [
   "facilities",
   "sub_types",
   "tags",
+  "likes",
 ];
 
 const enrichCtx = (ctx) => {
