@@ -18,6 +18,7 @@ const getEditableFieldsFromSite = (siteData) => {
     pricerange,
     url,
     subTypes,
+    type,
   } = siteData;
   return {
     title,
@@ -28,6 +29,7 @@ const getEditableFieldsFromSite = (siteData) => {
     pricerange,
     sub_types: subTypes,
     url,
+    type,
   };
 };
 
