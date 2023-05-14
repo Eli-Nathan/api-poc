@@ -17,7 +17,7 @@ const getEditableFieldsFromSite = (siteData) => {
     facilities,
     pricerange,
     url,
-    subTypes,
+    sub_types,
     type,
   } = siteData;
   return {
@@ -27,7 +27,7 @@ const getEditableFieldsFromSite = (siteData) => {
     email,
     facilities,
     pricerange,
-    sub_types: subTypes,
+    sub_types,
     url,
     type,
   };
