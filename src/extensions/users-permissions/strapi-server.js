@@ -1,4 +1,5 @@
 const axios = require("axios");
+const authAdmin = require("firebase-admin/auth");
 
 module.exports = (plugin) => {
   plugin.policies["isAuthed"] = async (ctx, config, { strapi }) => {

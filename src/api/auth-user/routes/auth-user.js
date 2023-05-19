@@ -31,6 +31,14 @@ module.exports = {
       },
     },
     {
+      method: "DELETE",
+      path: "/auth-users/me",
+      handler: "auth-user.delete",
+      config: {
+        policies: ["plugin::users-permissions.isAuthed", "is-user"],
+      },
+    },
+    {
       method: "POST",
       path: "/auth-users",
       handler: "auth-user.create",
