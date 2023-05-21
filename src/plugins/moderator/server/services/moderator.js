@@ -202,7 +202,7 @@ module.exports = ({ strapi }) => ({
       where: {
         id: edit.site.id,
       },
-      data: { images: edit.images, ...edit.data },
+      data: { images: edit.images, ...edit.data, facilities: edit.facilities },
     });
     if (edit.owner) {
       const currentUser = await strapi.db
