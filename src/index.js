@@ -1,5 +1,4 @@
 "use strict";
-const axios = require("axios");
 const { initializeApp, applicationDefault } = require("firebase-admin/app");
 const authAdmin = require("firebase-admin/auth");
 const logger = require("./nomad/logger");

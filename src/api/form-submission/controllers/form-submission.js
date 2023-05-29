@@ -1,5 +1,4 @@
 "use strict";
-const axios = require("axios");
 const { sendEntryToSlack } = require("../../../nomad/slack");
 
 /**

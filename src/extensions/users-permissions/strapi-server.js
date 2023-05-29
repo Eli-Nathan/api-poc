@@ -1,4 +1,3 @@
-const axios = require("axios");
 const authAdmin = require("firebase-admin/auth");
 
 module.exports = (plugin) => {

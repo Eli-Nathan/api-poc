@@ -23,7 +23,7 @@
     "@strapi/strapi": "4.9.2",
     "@strapi/utils": "4.9.2",
     "better-sqlite3": "7.4.6",
-    "axios": "^0.22.0",
+    "axios": "^0.27.2",
     "file-saver": "^2.0.5",
     "firebase-admin": "^10.0.2",
     "graphql": "^16.0.1",

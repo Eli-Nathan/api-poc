@@ -59,6 +59,7 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
       const siteWithUsers = await strapi.db.query("api::site.site").findOne({
         where: { id: ctx.params.id },
         populate: {
+          images: true,
           likes: true,
           owners: {
             populate: { profile_pic: true },
@@ -86,6 +87,7 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
         },
         facilities: true,
         sub_types: true,
+        images: true,
       },
     });
     if (site) {
@@ -101,6 +103,7 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
           contributors: {
             populate: { profile_pic: true },
           },
+          images: true,
         },
       });
       const siteToParse = {

@@ -5,6 +5,7 @@ const populateList = [
   "facilities",
   "sub_types",
   "tags",
+  "images",
 ];
 
 const enrichCtx = (ctx) => {

@@ -9,6 +9,7 @@ const populateList = [
   "owners",
   "facilities",
   "sub_types",
+  "images",
   "tags",
   "likes",
 ];
