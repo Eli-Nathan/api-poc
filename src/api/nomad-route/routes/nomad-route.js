@@ -18,5 +18,11 @@ module.exports = {
       handler: "nomad-route.findOne",
       middlewares: ["populate-nomad-routes"],
     },
+    {
+      method: "GET",
+      path: "/nomad-routes/uid/:slug",
+      handler: "nomad-route.findOneByUID",
+      middlewares: ["populate-nomad-routes"],
+    },
   ],
 };

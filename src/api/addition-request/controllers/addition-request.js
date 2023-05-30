@@ -36,7 +36,7 @@ module.exports = createCoreController(
           };
         } else {
           const addition = await super.create(ctx);
-          await sendEntryToSlack(addition, "additionRequest", ctx);
+          // await sendEntryToSlack(addition, "additionRequest", ctx);
           return this.sanitizeOutput(addition, ctx);
         }
       }

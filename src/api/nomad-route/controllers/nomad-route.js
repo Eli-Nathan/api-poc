@@ -56,5 +56,44 @@ module.exports = createCoreController(
       }
       return this.transformResponse(route);
     },
+    async findOneByUID(ctx) {
+      const route = await strapi.db
+        .query("api::nomad-route.nomad-route")
+        .findOne({
+          where: { slug: ctx.params.slug },
+          populate: {
+            image: true,
+            tags: true,
+            pois: {
+              populate: {
+                type: {
+                  populate: {
+                    remote_icon: true,
+                    remote_marker: true,
+                  },
+                },
+              },
+              images: true,
+            },
+            stay: {
+              populate: {
+                type: {
+                  populate: {
+                    remote_icon: true,
+                    remote_marker: true,
+                  },
+                },
+              },
+              images: true,
+            },
+          },
+        });
+
+      if (!route) {
+        ctx.status = 404;
+        return { status: 404, message: "Route not found" };
+      }
+      return this.transformResponse(route, ctx);
+    },
   })
 );

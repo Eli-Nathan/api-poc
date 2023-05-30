@@ -68,6 +68,11 @@
       "relation": "manyToMany",
       "target": "api::site.site",
       "inversedBy": "nomad_routes"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": false
     }
   }
 }
