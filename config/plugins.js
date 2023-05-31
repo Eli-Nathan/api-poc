@@ -13,6 +13,25 @@ module.exports = ({ env }) => {
         },
       },
     },
+    email: {
+      config: {
+        provider: "strapi-provider-email-smtp",
+        providerOptions: {
+          host: "smtp.gmail.com", //SMTP Host
+          port: 465, //SMTP Port
+          secure: true,
+          username: "wildway.app@gmail.com",
+          password: env("WILDWAY_GMAIL_PASSWORD"),
+          rejectUnauthorized: true,
+          requireTLS: true,
+          connectionTimeout: 1,
+        },
+      },
+      settings: {
+        defaultFrom: "wildway.app@gmail.com",
+        defaultReplyTo: "wildway.app@gmail.com",
+      },
+    },
     moderator: {
       enabled: true,
       resolve: "./src/plugins/moderator",

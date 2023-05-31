@@ -54,7 +54,7 @@ module.exports = createCoreController(
         ctx.status = 404;
         return { status: 404, message: "Route not found" };
       }
-      return this.transformResponse(route);
+      return this.transformResponse(route, ctx);
     },
     async findOneByUID(ctx) {
       const route = await strapi.db
