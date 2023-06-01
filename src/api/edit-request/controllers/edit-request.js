@@ -75,7 +75,7 @@ module.exports = createCoreController(
         }
       }
       const edit = await super.create(ctx);
-      await sendEntryToslack(edit, "editRequest", ctx);
+      await sendEntryToSlack(edit, "editRequest", ctx);
       return this.sanitizeOutput(edit, ctx);
     },
   })

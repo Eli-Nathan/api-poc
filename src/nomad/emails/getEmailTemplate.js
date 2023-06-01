@@ -132,13 +132,13 @@ a[x-apple-data-detectors] {
                   <td align="center" valign="top" style="padding:0;Margin:0;width:520px">
                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="mso-table-lspace:0pt;mso-table-rspace:0pt;border-collapse:collapse;border-spacing:0px">
                      <tr>
-                      <td align="center" style="padding:0;Margin:0"><!--[if mso]><a href="https://wildway.app" target="_blank" hidden>
+                      <td align="center" style="padding:0;Margin:0"><!--[if mso]><a href="https://wildway.app/map" target="_blank" hidden>
 	<v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" esdevVmlButton href="" 
                 style="height:56px; v-text-anchor:middle; width:538px" arcsize="50%" stroke="f"  fillcolor="#f45b69">
 		<w:anchorlock></w:anchorlock>
 		<center style='color:#ffffff; font-family:Imprima, Arial, sans-serif; font-size:22px; font-weight:700; line-height:22px;  mso-text-raise:1px'>Explore the wildway</center>
 	</v:roundrect></a>
-<![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#f45b69;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a href="https://wildway.app" class="es-button msohide" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:22px;padding:15px 20px 15px 20px;display:block;background:#f45b69;border-radius:30px;font-family:Imprima, Arial, sans-serif;font-weight:bold;font-style:normal;line-height:26px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #F45B69;mso-hide:all;padding-left:5px;padding-right:5px">Explore the wildway</a></span><!--<![endif]--></td>
+<![endif]--><!--[if !mso]><!-- --><span class="msohide es-button-border" style="border-style:solid;border-color:#2CB543;background:#f45b69;border-width:0px;display:block;border-radius:30px;width:auto;mso-hide:all"><a href="https://wildway.app/map" class="es-button msohide" target="_blank" style="mso-style-priority:100 !important;text-decoration:none;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;color:#FFFFFF;font-size:22px;padding:15px 20px 15px 20px;display:block;background:#f45b69;border-radius:30px;font-family:Imprima, Arial, sans-serif;font-weight:bold;font-style:normal;line-height:26px;width:auto;text-align:center;mso-padding-alt:0;mso-border-alt:10px solid #F45B69;mso-hide:all;padding-left:5px;padding-right:5px">Explore the wildway</a></span><!--<![endif]--></td>
                      </tr>
                    </table></td>
                  </tr>
