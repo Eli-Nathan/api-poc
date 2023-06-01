@@ -2,8 +2,10 @@
 
 const {
   getRejectedMailContent,
+  getApprovedMailContent,
   sendEmail,
 } = require("../../../../nomad/emails");
+const slugify = require("slugify");
 
 module.exports = ({ strapi }) => ({
   async getAdditions() {
@@ -96,10 +98,13 @@ module.exports = ({ strapi }) => ({
           site: true,
         },
       });
-    const { text, html, subject } = getRejectedMailContent(
-      collection,
-      rejected.title
-    );
+    let title = rejected.title;
+    if (collection === "edit-request") {
+      title = rejected.data.title;
+    } else if (collection === "comment") {
+      title = rejected.site.title;
+    }
+    const { text, html, subject } = getRejectedMailContent(collection, title);
     await sendEmail({
       strapi,
       subject,
@@ -128,6 +133,7 @@ module.exports = ({ strapi }) => ({
       data: {
         ...safeAddition,
         added_by: addition.owner.id,
+        slug: slugify(addition.title),
       },
     });
     if (addition.owner) {
@@ -142,6 +148,20 @@ module.exports = ({ strapi }) => ({
         data: {
           score: currentUser.score + 10,
         },
+      });
+
+      const { text, html, subject } = getApprovedMailContent(
+        "place addition",
+        approved.title,
+        approved.slug,
+        10
+      );
+      await sendEmail({
+        strapi,
+        subject,
+        address: addition.owner.email,
+        text,
+        html,
       });
     }
     await strapi.db.query(`api::addition-request.addition-request`).update({
@@ -159,8 +179,10 @@ module.exports = ({ strapi }) => ({
       populate: {
         owner: true,
         type: true,
+        site: true,
       },
     });
+
     await strapi.db.query(`api::comment.comment`).update({
       where: { id: comment.id },
       data: {
@@ -180,8 +202,21 @@ module.exports = ({ strapi }) => ({
           score: currentUser.score + 1,
         },
       });
+      const { text, html, subject } = getApprovedMailContent(
+        "comment",
+        comment.site.title,
+        comment.site.slug,
+        1
+      );
+      await sendEmail({
+        strapi,
+        subject,
+        address: comment.owner.email,
+        text,
+        html,
+      });
     }
-    return approved;
+    return comment;
   },
 
   async approveEdit(id) {
@@ -198,7 +233,6 @@ module.exports = ({ strapi }) => ({
           images: true,
         },
       });
-    console.log("edit.data", edit.data);
     const approved = await strapi.db.query(`api::site.site`).update({
       where: {
         id: edit.site.id,
@@ -216,6 +250,20 @@ module.exports = ({ strapi }) => ({
         data: {
           score: currentUser.score + 5,
         },
+      });
+
+      const { text, html, subject } = getApprovedMailContent(
+        "edit request",
+        approved.title,
+        approved.slug || slugify(approved.title),
+        5
+      );
+      await sendEmail({
+        strapi,
+        subject,
+        address: edit.owner.email,
+        text,
+        html,
       });
     }
     await strapi.db.query(`api::edit-request.edit-request`).update({
