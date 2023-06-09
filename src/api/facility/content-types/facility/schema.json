@@ -27,11 +27,17 @@
       "mappedBy": "facilities"
     },
     "remote_icon": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
       "allowedTypes": [
         "images"
-      ],
-      "type": "media",
-      "multiple": true
+      ]
+    },
+    "priority": {
+      "type": "integer",
+      "unique": false,
+      "default": 10
     }
   }
 }
