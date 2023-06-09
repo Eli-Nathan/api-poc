@@ -47,6 +47,9 @@
       "allowedTypes": [
         "images"
       ]
+    },
+    "contribute_description": {
+      "type": "text"
     }
   }
 }
