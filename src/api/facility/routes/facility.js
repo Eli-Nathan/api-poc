@@ -14,7 +14,9 @@ module.exports = {
       method: "GET",
       path: "/facilities",
       handler: "facility.find",
-      middlewares: ["populate-facilities"],
+      config: {
+        middlewares: ["api::facility.populate-facilities"],
+      },
     },
   ],
 };

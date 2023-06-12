@@ -10,19 +10,25 @@ module.exports = {
       method: "GET",
       path: "/sites",
       handler: "site.find",
-      middlewares: ["populate-sites"],
+      config: {
+        middlewares: ["api::site.populate-sites"],
+      },
     },
     {
       method: "GET",
       path: "/sites/:id",
       handler: "site.findOne",
-      middlewares: ["populate-site"],
+      config: {
+        middlewares: ["api::site.populate-site"],
+      },
     },
     {
       method: "GET",
       path: "/sites/uid/:uid",
       handler: "site.findOneByUID",
-      middlewares: ["populate-site"],
+      config: {
+        middlewares: ["api::site.populate-site"],
+      },
     },
   ],
 };

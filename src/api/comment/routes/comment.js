@@ -10,14 +10,16 @@ module.exports = {
       method: "GET",
       path: "/comments",
       handler: "comment.find",
-      middlewares: ["populate-comments"],
+      config: {
+        middlewares: ["api::comment.populate-comments"],
+      },
     },
     {
       method: "POST",
       path: "/comments",
       handler: "comment.create",
-      middlewares: ["populate-comments"],
       config: {
+        middlewares: ["api::comment.populate-comments"],
         policies: ["plugin::users-permissions.isAuthed", "global::set-owner"],
       },
     },
@@ -25,8 +27,8 @@ module.exports = {
       method: "DELETE",
       path: "/comments/:id",
       handler: "comment.delete",
-      middlewares: ["populate-comments"],
       config: {
+        middlewares: ["api::comment.populate-comments"],
         policies: ["plugin::users-permissions.isAuthed", "global::is-owner"],
       },
     },

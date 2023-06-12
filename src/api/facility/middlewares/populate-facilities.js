@@ -6,6 +6,13 @@ const enrichCtx = (ctx) => {
   }
   const currentPopulateList = ctx.query.populate || [];
   ctx.query.populate = [...currentPopulateList, ...populateList];
+  if (!ctx.query.pagination) {
+    ctx.query.pagination = {};
+  }
+  ctx.query.pagination = {
+    ...ctx.query.pagination,
+    pageSize: ctx.query.pagination?.pageSize || 100,
+  };
   return ctx;
 };
 

@@ -14,8 +14,8 @@ module.exports = {
       method: "GET",
       path: "/addition-requests",
       handler: "addition-request.find",
-      middlewares: ["populate-additions"],
       config: {
+        middlewares: ["api::addition-request.populate-additions"],
         policies: ["plugin::users-permissions.isAuthed", "global::is-owner"],
       },
     },
@@ -23,8 +23,8 @@ module.exports = {
       method: "GET",
       path: "/addition-requests/:id",
       handler: "addition-request.findOne",
-      middlewares: ["populate-additions"],
       config: {
+        middlewares: ["api::addition-request.populate-additions"],
         policies: ["plugin::users-permissions.isAuthed", "global::is-owner"],
       },
     },
@@ -32,8 +32,8 @@ module.exports = {
       method: "POST",
       path: "/addition-requests",
       handler: "addition-request.create",
-      middlewares: ["populate-additions"],
       config: {
+        middlewares: ["api::addition-request.populate-additions"],
         policies: ["plugin::users-permissions.isAuthed", "global::set-owner"],
       },
     },

@@ -20,13 +20,17 @@ module.exports = {
       method: "GET",
       path: "/home-filterlinks",
       handler: "home-filterlink.find",
-      middlewares: ["populate-filterlinks"],
+      config: {
+        middlewares: ["api::home-filterlink.populate-filterlinks"],
+      },
     },
     {
       method: "GET",
       path: "/home-filterlinks/:id",
       handler: "home-filterlink.findOne",
-      middlewares: ["populate-filterlinks"],
+      config: {
+        middlewares: ["api::home-filterlink.populate-filterlinks"],
+      },
     },
   ],
 };

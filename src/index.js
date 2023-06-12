@@ -56,13 +56,17 @@ module.exports = {
                 nomadUser.siteCount = nomadUser.sites.length || 0;
               }
               const mergedData = { ...userData, ...nomadUser };
-              logger.info("User from DB", { user: mergedData });
+              logger.info("User from DB verified with Firebase", {
+                email: mergedData.email,
+              });
               ctx.state.user = mergedData;
               return { authenticated: true, credentials: mergedData };
             }
 
             if (nomadUser) {
-              logger.info("User from DB", { user: nomadUser });
+              logger.warn("User from DB potentially unverified", {
+                email: nomadUser.email,
+              });
               ctx.state.user = nomadUser;
               ctx.state.user.sub = userData.sub;
               return { authenticated: true, credentials: nomadUser };

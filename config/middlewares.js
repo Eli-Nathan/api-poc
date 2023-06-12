@@ -29,13 +29,4 @@ module.exports = [
       },
     },
   },
-  "api::nomad-route.populate-nomad-routes",
-  "api::user-route.populate-user-routes",
-  "api::addition-request.populate-additions",
-  "api::edit-request.populate-edits",
-  "api::site.populate-sites",
-  "api::site.populate-site",
-  "api::home-filterlink.populate-filterlinks",
-  "api::comment.populate-comments",
-  "api::facility.populate-facilities",
 ];
