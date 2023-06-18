@@ -27,7 +27,7 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
         "slug",
       ],
       filters: qs.parse(ctx.query.filters),
-      sort: { priority: "DESC" },
+      sort: ctx.query.sort || { priority: "DESC" },
       populate: {
         type: {
           populate: {
