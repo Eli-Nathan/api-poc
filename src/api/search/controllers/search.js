@@ -13,17 +13,39 @@ module.exports = {
         sitesLimit = 8,
         popularRoutesStart = 0,
         popularRoutesLimit = 8,
+        communityRoutesStart = 0,
+        communityRoutesLimit = 8,
+        usersStart = 0,
+        usersLimit = 8,
       } = ctx.request.query;
 
-      const sites = await strapi
+      let sites;
+      let popularRoutes;
+      let communityRoutes;
+      let people;
+
+      sites = await strapi
         .service("api::search.search")
         .searchSites(query, sitesStart, sitesLimit);
 
-      const popularRoutes = await strapi
+      popularRoutes = await strapi
         .service("api::search.search")
         .searchPopularRoutes(query, popularRoutesStart, popularRoutesLimit);
 
-      ctx.body = { sites, popularRoutes };
+      if (ctx.state.user) {
+        communityRoutes = await strapi
+          .service("api::search.search")
+          .searchCommunityRoutes(
+            query,
+            communityRoutesStart,
+            communityRoutesLimit
+          );
+        people = await strapi
+          .service("api::search.search")
+          .searchUsers(query, usersStart, usersLimit);
+      }
+
+      ctx.body = { sites, popularRoutes, communityRoutes, people };
     } catch (err) {
       ctx.badRequest("Post report controller error", { moreDetails: err });
     }

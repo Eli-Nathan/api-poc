@@ -54,29 +54,23 @@ module.exports = {
       const routes = await strapi.entityService.findMany(
         "api::user-route.user-route",
         {
-          fields: ["name", "sites", "image", "slug"],
+          fields: ["name"],
           filters: {
+            public: true,
             name: {
-              $containsi: query,
+              $containsi: `${query}`,
             },
           },
           populate: {
             image: true,
             tags: true,
-            owner: {
-              profile_pic: true,
-            },
-            sites: {
-              site: {
-                type: true,
-              },
-            },
+            sites: true,
           },
         }
       );
 
       // return the reduced data
-      return sites;
+      return routes;
     } catch (err) {
       return err;
     }
@@ -104,6 +98,34 @@ module.exports = {
 
       // return the reduced data
       return routes;
+    } catch (err) {
+      return err;
+    }
+  },
+  searchUsers: async (query, start, limit) => {
+    try {
+      // fetching data
+      const users = await strapi.entityService.findMany(
+        "api::auth-user.auth-user",
+        {
+          start,
+          limit,
+          filters: {
+            isVerified: true,
+            name: {
+              $containsi: `${query}`,
+            },
+          },
+          populate: {
+            profile_pic: true,
+            tags: true,
+          },
+          fields: ["name", "avatar", "businessName", "score"],
+        }
+      );
+
+      // return the reduced data
+      return users;
     } catch (err) {
       return err;
     }
