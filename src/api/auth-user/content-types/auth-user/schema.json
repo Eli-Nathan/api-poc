@@ -127,6 +127,10 @@
       "relation": "manyToMany",
       "target": "api::site.site",
       "mappedBy": "contributors"
+    },
+    "isTest": {
+      "type": "boolean",
+      "default": false
     }
   }
 }

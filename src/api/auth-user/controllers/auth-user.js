@@ -131,6 +131,10 @@ module.exports = createCoreController(
             id: {
               $not: ctx.state.user.id,
             },
+            score: {
+              $gt: 0,
+            },
+            isTest: false,
           },
           sort: "score:desc",
           populate: {
