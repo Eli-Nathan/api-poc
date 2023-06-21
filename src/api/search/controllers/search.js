@@ -10,13 +10,13 @@ module.exports = {
       const {
         query,
         sitesStart = 0,
-        sitesLimit = 8,
+        sitesLimit = 25,
         popularRoutesStart = 0,
-        popularRoutesLimit = 8,
+        popularRoutesLimit = 25,
         communityRoutesStart = 0,
-        communityRoutesLimit = 8,
+        communityRoutesLimit = 25,
         usersStart = 0,
-        usersLimit = 8,
+        usersLimit = 25,
       } = ctx.request.query;
 
       let sites;
