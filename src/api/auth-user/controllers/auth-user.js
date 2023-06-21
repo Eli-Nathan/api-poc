@@ -3,7 +3,7 @@
 /**
  *  auth-user controller
  */
-
+const { newUserAdded, sendEmail } = require("../../../nomad/emails");
 const { createCoreController } = require("@strapi/strapi").factories;
 const utils = require("@strapi/utils");
 
@@ -269,6 +269,19 @@ module.exports = createCoreController(
 
       ctx.request.body.data.role = baseRole.id;
       const user = await super.create(enrichedCtx);
+      if (user) {
+        const { text, html, subject } = newUserAdded(
+          user.data.attributes.name || "Name unknown",
+          user.data.id
+        );
+        await sendEmail({
+          strapi,
+          subject,
+          address: "wildway.app@gmail.com",
+          text,
+          html,
+        });
+      }
       return this.sanitizeOutput(user, ctx);
     },
   })
