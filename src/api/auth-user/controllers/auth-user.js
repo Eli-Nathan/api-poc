@@ -120,6 +120,28 @@ module.exports = createCoreController(
       return this.sanitizeOutput(response, ctx);
     },
 
+    async getHighProfileUsers(ctx) {
+      const users = await strapi.entityService.findMany(
+        "api::auth-user.auth-user",
+        {
+          start: 0,
+          limit: 10,
+          filters: {
+            isVerified: true,
+            id: {
+              $not: ctx.state.user.id,
+            },
+          },
+          sort: "score:desc",
+          populate: {
+            profile_pic: true,
+          },
+          fields: ["name", "avatar", "businessName", "score"],
+        }
+      );
+      return await this.transformResponse(users);
+    },
+
     async editProfile(ctx) {
       let dataToUpdate = {};
       const enrichedCtx = enrichCtx(ctx);

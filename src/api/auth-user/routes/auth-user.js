@@ -24,6 +24,14 @@ module.exports = {
     },
     {
       method: "GET",
+      path: "/auth-users/explore",
+      handler: "auth-user.getHighProfileUsers",
+      config: {
+        policies: ["plugin::users-permissions.isAuthed"],
+      },
+    },
+    {
+      method: "GET",
       path: "/auth-users/subscription",
       handler: "auth-user.getSubscription",
       config: {
