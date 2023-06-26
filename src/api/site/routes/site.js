@@ -16,6 +16,14 @@ module.exports = {
     },
     {
       method: "GET",
+      path: "/sites/recent",
+      handler: "site.findRecent",
+      config: {
+        middlewares: ["api::site.populate-sites"],
+      },
+    },
+    {
+      method: "GET",
       path: "/sites/:id",
       handler: "site.findOne",
       config: {

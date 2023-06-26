@@ -52,6 +52,41 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
     };
   },
 
+  // find recent method
+  async findRecent(ctx) {
+    const sites = await strapi.entityService.findMany("api::site.site", {
+      fields: ["title", "image", "lat", "lng", "slug"],
+      filters: {
+        $or: [
+          {
+            owners: {
+              $not: null,
+            },
+          },
+          {
+            added_by: {
+              $not: null,
+            },
+          },
+        ],
+      },
+      sort: ctx.query.sort || { priority: "DESC" },
+      populate: {
+        type: true,
+        images: true,
+      },
+      limit: ctx.query.limit || ctx.query.pagination?.limit,
+    });
+    return {
+      data: sites.map((site) => {
+        return {
+          id: site.id,
+          attributes: { ...site, isOwned: !!site.owners?.length },
+        };
+      }),
+    };
+  },
+
   // find one method
   async findOne(ctx) {
     const site = await super.findOne(ctx);
