@@ -32,8 +32,8 @@ module.exports = createCoreController(
                     remote_marker: true,
                   },
                 },
+                images: true,
               },
-              images: true,
             },
             stay: {
               populate: {
@@ -43,8 +43,8 @@ module.exports = createCoreController(
                     remote_marker: true,
                   },
                 },
+                images: true,
               },
-              images: true,
             },
           },
         }
