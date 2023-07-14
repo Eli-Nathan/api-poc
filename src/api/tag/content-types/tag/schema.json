@@ -31,6 +31,12 @@
       "relation": "manyToMany",
       "target": "api::user-route.user-route",
       "mappedBy": "tags"
+    },
+    "posts": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::post.post",
+      "mappedBy": "tags"
     }
   }
 }
