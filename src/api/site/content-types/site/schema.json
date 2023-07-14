@@ -150,6 +150,9 @@
       "relation": "manyToMany",
       "target": "api::auth-user.auth-user",
       "mappedBy": "favourites"
+    },
+    "imageCaption": {
+      "type": "string"
     }
   }
 }
