@@ -36,13 +36,13 @@
     "SEO": {
       "displayName": "SEO block",
       "type": "component",
-      "repeatable": true,
+      "repeatable": false,
       "component": "seo.seo-block"
     },
     "tags": {
       "type": "relation",
       "relation": "manyToMany",
-      "target": "api::post-tag.post-tag",
+      "target": "api::tag.tag",
       "inversedBy": "posts"
     }
   }

@@ -4,10 +4,11 @@
   "info": {
     "singularName": "post-tag",
     "pluralName": "post-tags",
-    "displayName": "Post tags"
+    "displayName": "Post tags",
+    "description": ""
   },
   "options": {
-    "draftAndPublish": true
+    "draftAndPublish": false
   },
   "pluginOptions": {},
   "attributes": {
