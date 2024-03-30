@@ -1,4 +1,5 @@
 const axios = require("axios");
+const logger = require("../../nomad/logger");
 
 const getPlaceFromLatLng = async ({ lat, lng }) => {
   const place = await axios.get(
