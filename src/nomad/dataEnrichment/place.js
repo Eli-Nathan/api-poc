@@ -12,8 +12,13 @@ const getPlacesFromQuery = async ({ query }) => {
     const places = await axios.get(
       `https://nominatim.openstreetmap.org/search?q=${query}, Scotland&format=jsonv2&countrycodes=gb&limit=50&namedetails=1&addressdetails=1&extratags=1&accept-language=en-GB`
     );
+    logger.warn(
+      "Nominatim",
+      `https://nominatim.openstreetmap.org/search?q=${query}, Scotland&format=jsonv2&countrycodes=gb&limit=50&namedetails=1&addressdetails=1&extratags=1&accept-language=en-GB`
+    );
     return places?.data;
   } catch (err) {
+    logger.warn("Nominatim error", err);
     return [];
   }
 };
