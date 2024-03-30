@@ -1,6 +1,9 @@
 "use strict";
 const qs = require("qs");
+const axios = require("axios");
+
 const sanitizeApiResponse = require("../../../nomad/sanitzeApiResponse");
+const getWeather = require("../../../nomad/dataEnrichment/weather");
 /**
  *  site controller
  */
@@ -152,6 +155,28 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
     }
   },
 
+  //Search
+  async search(ctx) {
+    const { query, start = 0, limit = 25 } = ctx.request.query;
+    const sites = await strapi
+      .service("api::search.search")
+      .searchSites(query, start, limit);
+
+    const unlistedSites = await strapi
+      .service("api::search.search")
+      .searchUnlistedSites(query);
+
+    return this.transformResponse(
+      [
+        ...sites,
+        ...unlistedSites.map(
+          strapi.service("api::search.search").transformOSMToUnlistedSite
+        ),
+      ],
+      ctx
+    );
+  },
+
   async parseSingleSite(
     ctx,
     site,
@@ -236,6 +261,11 @@ module.exports = createCoreController("api::site.site", ({ strapi }) => ({
       )
     ).filter(Boolean);
     const output = await this.sanitizeOutput(site, ctx);
+    // const siteWeather = await getWeather({
+    //   id: output.data.id,
+    //   lat: output.data.attributes.lat,
+    //   lng: output.data.attributes.lng,
+    // });
     return {
       ...output,
       data: {

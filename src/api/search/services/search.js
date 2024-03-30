@@ -1,12 +1,11 @@
 "use strict";
-
+const { getPlacesFromQuery } = require("../../../nomad/dataEnrichment/place");
 /**
  * search service
  */
 
 module.exports = {
   searchSites: async (query, start, limit) => {
-    console.log("foo");
     try {
       // fetching data
       const sites = await strapi.entityService.findMany("api::site.site", {
@@ -46,6 +45,11 @@ module.exports = {
     } catch (err) {
       return err;
     }
+  },
+
+  searchUnlistedSites: async (query) => {
+    const places = await getPlacesFromQuery({ query });
+    return places;
   },
 
   searchCommunityRoutes: async (query, start, limit) => {
@@ -130,4 +134,42 @@ module.exports = {
       return err;
     }
   },
+
+  transformOSMToUnlistedSite: (osmSite) => {
+    const nameWithSuffix = getNameWithSuffix(
+      osmSite.namedetails.name,
+      osmSite.address
+    );
+    return {
+      unlisted: true,
+      id: `osm_${osmSite.osm_id}`,
+      title: nameWithSuffix,
+      type: {
+        id: `osm_type_${osmSite.type}`,
+        slug: osmSite.type,
+        name: osmSite.type,
+      },
+      lat: osmSite.lat,
+      lng: osmSite.lon,
+    };
+  },
+};
+
+const getNameWithSuffix = (name, address) => {
+  if (address.city && address.city !== name) {
+    return `${name}, ${address.city}`;
+  }
+  if (address.town && address.town !== name) {
+    return `${name}, ${address.town}`;
+  }
+  if (address.county && address.county !== name) {
+    return `${name}, ${address.county}`;
+  }
+  if (address.neighborhood && address.neighborhood !== name) {
+    return `${name}, ${address.neighborhood}`;
+  }
+  if (address.suburb && address.suburb !== name) {
+    return `${name}, ${address.suburb}`;
+  }
+  return "";
 };
