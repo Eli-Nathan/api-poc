@@ -11,7 +11,10 @@ const getPlaceFromLatLng = async ({ lat, lng }) => {
 const getPlacesFromQuery = async ({ query }) => {
   try {
     const places = await axios.get(
-      `https://nominatim.openstreetmap.org/search?q=${query}, Scotland&format=jsonv2&countrycodes=gb&limit=50&namedetails=1&addressdetails=1&extratags=1&accept-language=en-GB`
+      `https://nominatim.openstreetmap.org/search?q=${query}, Scotland&format=jsonv2&countrycodes=gb&limit=50&namedetails=1&addressdetails=1&extratags=1&accept-language=en-GB`,
+      {
+        headers: { "User-Agent": `WildWay-${query}` },
+      }
     );
     logger.warn(
       "Nominatim",
